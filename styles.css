@@ -16,6 +16,19 @@
   --shadow-soft: 0 14px 38px rgba(90, 59, 221, 0.1);
 }
 
+.dark {
+  --bg: #0f172a;
+  --surface: rgba(30, 41, 59, 0.7);
+  --surface-strong: rgba(15, 23, 42, 0.9);
+  --surface-soft: rgba(30, 41, 59, 0.4);
+  --border: rgba(255, 255, 255, 0.1);
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --primary: #818cf8;
+  --secondary: #22d3ee;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -110,6 +123,7 @@ input {
 
 .glass {
   background: var(--surface);
+  -webkit-backdrop-filter: blur(24px);
   backdrop-filter: blur(24px);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
@@ -1268,3 +1282,5 @@ input {
     font-size: 0.62rem;
   }
 }
+.animate-crystal { animation: float 6s ease-in-out infinite; }  
+@keyframes float { 0%%, 100%% { transform: translateY(0); } 50%% { transform: translateY(-10px); } } 

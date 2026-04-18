@@ -14,7 +14,8 @@ const PRESENCE_TIMEOUT_MS = 18 * 60 * 1000;
 const SIMULATION_INTERVAL_MS = 9000;
 const MAX_VISITORS = 500;
 const MOVEMENT_LOG_LIMIT = 160;
-const SASE_SHARED_SECRET = String(process.env.SASE_SHARED_SECRET || '');
+const SASE_SHARED_SECRET = process.env.SASE_SHARED_SECRET;
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || '*'; 
 const TEACHER_PROVIDERS = new Set(['teacher', 'docente', 'maestro']);
 
 const FIRST_NAMES = [
@@ -665,6 +666,7 @@ async function serveStatic(pathname, response) {
 function sendJson(response, statusCode, payload) {
   response.writeHead(statusCode, {
     'Content-Type': 'application/json; charset=utf-8',
+    'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
     'Cache-Control': 'no-store'
   });
   response.end(JSON.stringify(payload));

@@ -4,8 +4,8 @@
 - The functional app now has a tiny local backend: `server.js` serves the root SPA (`index.html` + `app.js` + `styles.css`) and persists shared state in `data/state.json`.
 - `data/stands.json` is the editable source of truth for stand names, zones, capacities, and physical map coordinates.
 - There is still no `package.json`; run everything with plain `node`.
-- `stitch_feria_de_ciencias_2026/` contains 5 standalone English `Luminous Science` screens.
-- `stitch_rally_de_ciencias_310/` contains 7 standalone Spanish `Feria de Ciencias` screens plus `luminous_frost/DESIGN.md`.
+- `design_references/stitch_feria_de_ciencias_2026/` contains 5 standalone English `Luminous Science` screens.
+- `design_references/stitch_rally_de_ciencias_310/` contains 7 standalone Spanish `Feria de Ciencias` screens plus `luminous_frost/DESIGN.md`.
 - Each screen lives in its own folder and contains only `code.html` plus a sibling `screen.png` reference image.
 
 ## Editing
@@ -23,8 +23,8 @@
 - QR deep links use hash routes like `#/alumno/stand/12?scan=1`; keep that contract if you touch routing.
 
 ## Design Conventions
-- Preserve the language/brand split unless asked otherwise: `stitch_feria_de_ciencias_2026/` is English and branded `Luminous Science`; `stitch_rally_de_ciencias_310/` is Spanish and branded `Feria de Ciencias`.
-- For rally pages, `stitch_rally_de_ciencias_310/luminous_frost/DESIGN.md` is the only repo-level design spec. Keep its glassmorphism, bright mesh gradients, compact spacing, and no-divider rules in mind when editing those screens.
+- Preserve the language/brand split unless asked otherwise: `design_references/stitch_feria_de_ciencias_2026/` is English and branded `Luminous Science`; `design_references/stitch_rally_de_ciencias_310/` is Spanish and branded `Feria de Ciencias`.
+- For rally pages, `design_references/stitch_rally_de_ciencias_310/luminous_frost/DESIGN.md` is the only repo-level design spec. Keep its glassmorphism, bright mesh gradients, compact spacing, and no-divider rules in mind when editing those screens.
 
 ## Verification
 - There is no repo-defined build, lint, typecheck, or test pipeline.

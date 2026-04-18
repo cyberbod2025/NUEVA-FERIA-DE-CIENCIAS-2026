@@ -147,7 +147,15 @@ const ui = {
 let state = null;
 let session = loadSession();
 
+initTheme();
 bootstrap();
+
+function initTheme() {
+  const saved = window.localStorage.getItem('feria-theme');
+  if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+  }
+}
 
 async function bootstrap() {
   if (!ui.listenersBound) {
@@ -1183,6 +1191,14 @@ function handleClick(event) {
     return;
   }
 
+  if (action === 'toggle-theme') {
+    document.documentElement.classList.toggle('dark');
+    const isDark = document.documentElement.classList.contains('dark');
+    window.localStorage.setItem('feria-theme', isDark ? 'dark' : 'light');
+    renderApp();
+    return;
+  }
+
   if (action === 'check-in') {
     const visitor = getCurrentVisitor();
     if (!visitor) {
@@ -1609,6 +1625,7 @@ function renderTeacherView(analytics) {
             <span class='material-symbols-outlined'>admin_panel_settings</span>
             <span><strong>Coordinacion</strong> · modo docente</span>
           </div>
+          ${renderThemeToggle()}
           <button class='icon-button' data-action='logout' aria-label='Cerrar sesion'>
             <span class='material-symbols-outlined'>logout</span>
           </button>
@@ -1744,6 +1761,7 @@ function renderStudentLayout(config) {
             <span class='material-symbols-outlined'>account_circle</span>
             <span><strong>${escapeHtml(config.visitor.name)}</strong> · ${escapeHtml(config.visitor.group)}</span>
           </div>
+          ${renderThemeToggle()}
           <button class='icon-button' data-action='logout' aria-label='Cerrar sesion'>
             <span class='material-symbols-outlined'>logout</span>
           </button>
@@ -1773,6 +1791,15 @@ function renderBottomLink(href, icon, label, active) {
       <span class='material-symbols-outlined'>${icon}</span>
       <span class='bottom-nav__label'>${label}</span>
     </a>
+  `;
+}
+
+function renderThemeToggle() {
+  const isDark = document.documentElement.classList.contains('dark');
+  return `
+    <button class='icon-button' data-action='toggle-theme' aria-label='Cambiar tema'>
+      <span class='material-symbols-outlined'>${isDark ? 'light_mode' : 'dark_mode'}</span>
+    </button>
   `;
 }
 
