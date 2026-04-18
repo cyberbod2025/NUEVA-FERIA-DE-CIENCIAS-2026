@@ -18,6 +18,8 @@
 - Do not assume local assets exist. Images and fonts are loaded from remote URLs inside each HTML file.
 - Folder names use on-disk underscore substitutions like `inicio_de_sesi_n` and `m_dulo_y_trivia`; use the filesystem names exactly as written unless the user explicitly asks for renames.
 - The browser only persists the selected demo session under `feria-ciencias-session-v1`; the real shared app state now comes from the backend.
+- Student login is public in the feria app. Teacher access is not: `#/docente` must only be reached through a SASE-issued session, never via a public form again.
+- SASE teacher handoff is prepared through `POST /api/session/teacher/sase` with a signed token and requires `SASE_SHARED_SECRET` on the backend.
 - QR deep links use hash routes like `#/alumno/stand/12?scan=1`; keep that contract if you touch routing.
 
 ## Design Conventions
@@ -27,5 +29,6 @@
 ## Verification
 - There is no repo-defined build, lint, typecheck, or test pipeline.
 - Start the app with `node server.js`, then open `http://localhost:3000` and verify both student and teacher flows there.
+- To test teacher SASE integration locally, start the server with `SASE_SHARED_SECRET=<secret>` and exchange a signed token through `/api/session/teacher/sase` before opening `#/docente`.
 - Fast syntax checks: `node --check app.js` and `node --check server.js`.
 - For reference screens, verification is still manual and visual: compare the edited `code.html` against its sibling `screen.png`, and preview the HTML directly in a browser or a simple static server if needed.

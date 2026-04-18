@@ -1,4 +1,5 @@
 const http = require('node:http');
+const crypto = require('node:crypto');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 
@@ -13,6 +14,8 @@ const PRESENCE_TIMEOUT_MS = 18 * 60 * 1000;
 const SIMULATION_INTERVAL_MS = 9000;
 const MAX_VISITORS = 500;
 const MOVEMENT_LOG_LIMIT = 160;
+const SASE_SHARED_SECRET = String(process.env.SASE_SHARED_SECRET || '');
+const TEACHER_PROVIDERS = new Set(['teacher', 'docente', 'maestro']);
 
 const FIRST_NAMES = [
   'Valentina', 'Mateo', 'Sofia', 'Bruno', 'Camila', 'Thiago', 'Martina', 'Dylan', 'Lucia', 'Tomas',
@@ -83,7 +86,17 @@ async function bootstrap() {
           const sessionData = await registerStudentSession(body);
           return sendJson(response, 200, sessionData);
         } catch (error) {
-          return sendJson(response, 400, { error: 'invalid_student', message: error.message });
+          return sendJson(response, error.statusCode || 400, { error: 'invalid_student', message: error.message });
+        }
+      }
+
+      if (url.pathname === '/api/session/teacher/sase' && request.method === 'POST') {
+        try {
+          const body = await readJsonBody(request);
+          const sessionData = await registerTeacherSessionFromSase(body);
+          return sendJson(response, 200, sessionData);
+        } catch (error) {
+          return sendJson(response, error.statusCode || 401, { error: 'invalid_teacher_session', message: error.message });
         }
       }
 
@@ -511,6 +524,90 @@ async function registerStudentSession(input) {
     displayName: visitor.name,
     group: visitor.group
   };
+}
+
+async function registerTeacherSessionFromSase(input) {
+  const token = cleanText(input?.token);
+
+  if (!token) {
+    throw createHttpError(400, 'Falta el token de SASE.');
+  }
+
+  if (!SASE_SHARED_SECRET) {
+    throw createHttpError(503, 'El backend no tiene configurado SASE_SHARED_SECRET.');
+  }
+
+  const payload = verifySaseTeacherToken(token);
+
+  return {
+    role: 'teacher',
+    provider: 'sase',
+    userId: String(payload.sub || payload.teacherId || payload.email),
+    displayName: String(payload.name || payload.displayName || 'Docente SASE'),
+    email: String(payload.email || ''),
+    issuedAt: Number(payload.iat || Math.floor(Date.now() / 1000)) * 1000,
+    expiresAt: Number(payload.exp || Math.floor(Date.now() / 1000) + 3600) * 1000
+  };
+}
+
+function verifySaseTeacherToken(token) {
+  const parts = token.split('.');
+  if (parts.length !== 2 || !parts[0] || !parts[1]) {
+    throw createHttpError(400, 'El token de SASE no tiene el formato esperado.');
+  }
+
+  const payloadPart = parts[0];
+  const signaturePart = parts[1];
+  const expectedSignature = crypto.createHmac('sha256', SASE_SHARED_SECRET).update(payloadPart).digest('base64url');
+
+  if (!timingSafeCompare(signaturePart, expectedSignature)) {
+    throw createHttpError(401, 'La firma del token de SASE no es valida.');
+  }
+
+  let payload;
+  try {
+    payload = JSON.parse(Buffer.from(payloadPart, 'base64url').toString('utf8'));
+  } catch (error) {
+    throw createHttpError(400, 'No se pudo leer el contenido del token de SASE.');
+  }
+
+  const now = Math.floor(Date.now() / 1000);
+  const role = cleanText(payload.role).toLowerCase();
+
+  if (!TEACHER_PROVIDERS.has(role)) {
+    throw createHttpError(403, 'El token recibido no corresponde a un maestro.');
+  }
+
+  if (!payload.sub && !payload.teacherId && !payload.email) {
+    throw createHttpError(400, 'El token de SASE no trae un identificador de maestro.');
+  }
+
+  if (payload.iat && Number(payload.iat) > now + 60) {
+    throw createHttpError(401, 'El token de SASE todavia no es valido.');
+  }
+
+  if (!payload.exp || Number(payload.exp) <= now) {
+    throw createHttpError(401, 'El token de SASE esta vencido.');
+  }
+
+  return payload;
+}
+
+function timingSafeCompare(left, right) {
+  const leftBuffer = Buffer.from(String(left));
+  const rightBuffer = Buffer.from(String(right));
+
+  if (leftBuffer.length !== rightBuffer.length) {
+    return false;
+  }
+
+  return crypto.timingSafeEqual(leftBuffer, rightBuffer);
+}
+
+function createHttpError(statusCode, message) {
+  const error = new Error(message);
+  error.statusCode = statusCode;
+  return error;
 }
 
 function buildStudentKey(firstName, lastName, group) {

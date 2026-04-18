@@ -1,5 +1,7 @@
 const APP_VERSION = 2;
 const SESSION_KEY = 'feria-ciencias-session-v1';
+const SASE_TOKEN_PARAM = 'sase_token';
+const TEACHER_PROVIDER = 'sase';
 const PRESENCE_TIMEOUT_MINUTES = 18;
 const PRESENCE_TIMEOUT_MS = PRESENCE_TIMEOUT_MINUTES * 60 * 1000;
 const SIMULATION_INTERVAL_MS = 9000;
@@ -138,7 +140,8 @@ const ui = {
   listenersBound: false,
   liveStarted: false,
   booting: true,
-  bootError: ''
+  bootError: '',
+  saseError: ''
 };
 
 let state = null;
@@ -154,6 +157,7 @@ async function bootstrap() {
     ui.listenersBound = true;
   }
 
+  await consumeTeacherSessionFromUrl();
   await refreshState({ skipRender: true });
   ui.booting = false;
   ensureRoute();
@@ -226,26 +230,109 @@ async function createStudentSession(payload) {
   return response.json();
 }
 
+async function createTeacherSessionFromSase(token) {
+  const response = await fetch('./api/session/teacher/sase', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    },
+    body: JSON.stringify({ token })
+  });
+
+  if (!response.ok) {
+    const errorPayload = await response.json().catch(() => null);
+    throw new Error(errorPayload?.message || 'No se pudo validar el acceso docente desde SASE.');
+  }
+
+  return response.json();
+}
+
 function loadSession() {
   try {
     const raw = window.localStorage.getItem(SESSION_KEY);
-    return raw ? JSON.parse(raw) : null;
+    return sanitizeSession(raw ? JSON.parse(raw) : null);
   } catch (error) {
     return null;
   }
 }
 
 function saveSession(nextSession) {
-  session = nextSession;
+  session = sanitizeSession(nextSession);
 
   try {
-    if (nextSession) {
-      window.localStorage.setItem(SESSION_KEY, JSON.stringify(nextSession));
+    if (session) {
+      window.localStorage.setItem(SESSION_KEY, JSON.stringify(session));
     } else {
       window.localStorage.removeItem(SESSION_KEY);
     }
   } catch (error) {
     // Ignore local persistence errors and keep in-memory session.
+  }
+}
+
+function sanitizeSession(candidate) {
+  if (!candidate || typeof candidate !== 'object') {
+    return null;
+  }
+
+  if (candidate.role === 'student' && candidate.userId) {
+    return {
+      role: 'student',
+      userId: String(candidate.userId),
+      displayName: String(candidate.displayName || ''),
+      group: String(candidate.group || '')
+    };
+  }
+
+  if (candidate.role === 'teacher' && candidate.provider === TEACHER_PROVIDER && candidate.userId) {
+    if (candidate.expiresAt && Date.now() >= Number(candidate.expiresAt)) {
+      return null;
+    }
+
+    return {
+      role: 'teacher',
+      provider: TEACHER_PROVIDER,
+      userId: String(candidate.userId),
+      displayName: String(candidate.displayName || 'Docente'),
+      email: String(candidate.email || ''),
+      issuedAt: Number(candidate.issuedAt || Date.now()),
+      expiresAt: Number(candidate.expiresAt || 0)
+    };
+  }
+
+  return null;
+}
+
+function isTeacherSession(candidate) {
+  return Boolean(candidate && candidate.role === 'teacher' && candidate.provider === TEACHER_PROVIDER && candidate.userId);
+}
+
+function isStudentSession(candidate) {
+  return Boolean(candidate && candidate.role === 'student' && candidate.userId);
+}
+
+async function consumeTeacherSessionFromUrl() {
+  const url = new URL(window.location.href);
+  const token = url.searchParams.get(SASE_TOKEN_PARAM);
+
+  if (!token) {
+    return false;
+  }
+
+  url.searchParams.delete(SASE_TOKEN_PARAM);
+  window.history.replaceState({}, '', url.pathname + url.search + url.hash);
+
+  try {
+    const nextSession = await createTeacherSessionFromSase(token);
+    saveSession(nextSession);
+    ui.saseError = '';
+    return true;
+  } catch (error) {
+    console.error(error);
+    saveSession(null);
+    ui.saseError = error.message;
+    return false;
   }
 }
 
@@ -475,7 +562,7 @@ function ensureRoute() {
 
   const route = getRoute();
 
-  if (!session && route.name !== 'login') {
+  if (!session && route.name !== 'login' && route.name !== 'teacher') {
     window.location.hash = '#/login';
     return;
   }
@@ -485,12 +572,12 @@ function ensureRoute() {
     return;
   }
 
-  if (session && session.role === 'teacher' && route.name !== 'teacher') {
+  if (isTeacherSession(session) && route.name !== 'teacher') {
     window.location.hash = '#/docente';
     return;
   }
 
-  if (session && session.role === 'student' && route.name === 'teacher') {
+  if (isStudentSession(session) && route.name === 'teacher') {
     window.location.hash = '#/alumno';
   }
 }
@@ -588,6 +675,12 @@ function renderApp() {
   }
 
   if (route.name === 'teacher') {
+    if (!isTeacherSession(session)) {
+      document.title = 'Feria de Ciencias | Acceso Docente';
+      appRoot.innerHTML = renderTeacherGateView() + renderToast();
+      return;
+    }
+
     document.title = 'Feria de Ciencias | Panel Docente';
     appRoot.innerHTML = renderTeacherView(analytics) + renderToast();
     return;
@@ -813,7 +906,7 @@ function getVisitorScore(visitor) {
 }
 
 function getCurrentVisitor() {
-  if (!session || session.role !== 'student') {
+  if (!isStudentSession(session)) {
     return null;
   }
 
@@ -1147,15 +1240,6 @@ function handleSubmit(event) {
   event.preventDefault();
 
   const data = new FormData(form);
-  const role = data.get('role');
-
-  if (role === 'teacher') {
-    saveSession({ role: 'teacher', userId: 'teacher-1' });
-    showToast('Ingreso al panel docente.');
-    window.location.hash = '#/docente';
-    return;
-  }
-
   const firstName = cleanText(data.get('firstName'));
   const lastName = cleanText(data.get('lastName'));
   const group = cleanText(data.get('group'));
@@ -1239,26 +1323,10 @@ function renderLoginView(analytics) {
             </div>
           </article>
           <article class='glass form-card'>
-            <p class='eyebrow'>Acceso demo</p>
-            <h2>Entra como alumno o docente</h2>
-            <p class='subtitle'>Cada alumno entra con nombre, apellido y grupo. La vista docente controla aforo, ranking y redistribucion.</p>
+            <p class='eyebrow'>Acceso de alumnos</p>
+            <h2>Entrar a la feria</h2>
+            <p class='subtitle'>Los alumnos entran aqui con nombre, apellido y grupo. El panel docente ya no se habilita desde esta pantalla publica.</p>
             <form data-form='login'>
-              <div class='role-switch'>
-                <label class='role-option'>
-                  <input type='radio' name='role' value='student' checked>
-                  <span>
-                    <strong>Alumno</strong>
-                    <small>Recibe recomendaciones de stands y valida QR.</small>
-                  </span>
-                </label>
-                <label class='role-option'>
-                  <input type='radio' name='role' value='teacher'>
-                  <span>
-                    <strong>Docente</strong>
-                    <small>Ve aforo, ranking y reequilibra la feria.</small>
-                  </span>
-                </label>
-              </div>
               <div class='field-grid'>
                 <label class='field'>
                   <span>Nombre</span>
@@ -1275,6 +1343,11 @@ function renderLoginView(analytics) {
               </div>
               <button class='button button--wide' type='submit'>Entrar al MVP</button>
             </form>
+            <div class='summary-card'>
+              <p class='mini-label'>Acceso docente</p>
+              <strong class='summary-number'>Solo por SASE</strong>
+              <p class='metric-copy'>Los maestros deben entrar desde SASE para abrir el dashboard docente de la feria.</p>
+            </div>
           </article>
         </section>
       </main>
@@ -1893,6 +1966,39 @@ function renderBootState(title, copy) {
             <div class='code-card'>
               <span>Comando</span>
               <code>node server.js</code>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+  `;
+}
+
+function renderTeacherGateView() {
+  const copy = ui.saseError || 'El panel docente solo se abre con una sesion valida proveniente de SASE.';
+
+  return `
+    <div class='page-shell'>
+      <main class='page-content page-content--login'>
+        <section class='login-grid'>
+          <article class='glass hero-card'>
+            <p class='eyebrow'>Acceso docente protegido</p>
+            <h2>Los maestros deben ingresar desde SASE</h2>
+            <p class='subtitle'>${escapeHtml(copy)}</p>
+            <div class='grid-2'>
+              <div class='summary-card'>
+                <p class='mini-label'>Alumnos</p>
+                <strong class='summary-number'>Acceso local</strong>
+                <p class='metric-copy'>Los alumnos siguen entrando con nombre, apellido y grupo desde esta app.</p>
+              </div>
+              <div class='summary-card'>
+                <p class='mini-label'>Maestros</p>
+                <strong class='summary-number'>Modulo SASE</strong>
+                <p class='metric-copy'>SASE debe redirigir a la feria con un token firmado para habilitar el panel docente.</p>
+              </div>
+            </div>
+            <div class='hero-actions'>
+              <a class='button button--secondary' href='#/login'>Volver al acceso de alumnos</a>
             </div>
           </article>
         </section>
