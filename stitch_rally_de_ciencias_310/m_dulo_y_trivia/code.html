@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-dim": "#911c69",
+                    "background": "#eff7fe",
+                    "surface-variant": "#d2dee8",
+                    "primary-fixed": "#a192ff",
+                    "inverse-on-surface": "#969ea4",
+                    "error-dim": "#a70138",
+                    "on-secondary": "#c9fcff",
+                    "on-tertiary-fixed-variant": "#720050",
+                    "on-surface": "#283035",
+                    "on-error": "#ffefef",
+                    "surface-container": "#dfeaf2",
+                    "tertiary-fixed": "#ff8acb",
+                    "tertiary-fixed-dim": "#f974c1",
+                    "surface-dim": "#c9d6e0",
+                    "primary": "#5a3bdd",
+                    "on-primary-fixed-variant": "#2a0091",
+                    "primary-container": "#a192ff",
+                    "on-primary-fixed": "#000000",
+                    "surface-bright": "#eff7fe",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#004346",
+                    "on-primary-container": "#210077",
+                    "on-tertiary": "#ffeff4",
+                    "surface-container-high": "#d9e4ed",
+                    "on-secondary-container": "#00575b",
+                    "on-surface-variant": "#545d62",
+                    "on-secondary-fixed-variant": "#006266",
+                    "surface": "#eff7fe",
+                    "secondary-fixed": "#00f4fe",
+                    "outline-variant": "#a6aeb5",
+                    "on-background": "#283035",
+                    "inverse-primary": "#917eff",
+                    "error-container": "#f74b6d",
+                    "on-tertiary-fixed": "#360024",
+                    "secondary-dim": "#00595d",
+                    "surface-container-highest": "#d2dee8",
+                    "inverse-surface": "#070f14",
+                    "outline": "#70787e",
+                    "on-primary": "#f6f0ff",
+                    "tertiary": "#a12b76",
+                    "surface-tint": "#5a3bdd",
+                    "on-error-container": "#510017",
+                    "secondary-container": "#00f4fe",
+                    "error": "#b41340",
+                    "on-tertiary-container": "#620044",
+                    "tertiary-container": "#ff8acb",
+                    "primary-dim": "#4e2bd1",
+                    "secondary": "#00666a",
+                    "primary-fixed-dim": "#9481ff",
+                    "surface-container-low": "#e9f2fa",
+                    "secondary-fixed-dim": "#00e5ee"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .refractive-boundary {
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .animate-marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .liquid-glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-background selection:bg-primary/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(123,97,255,0.08)]">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-md mx-auto">
+<button class="p-2 text-violet-600 dark:text-violet-400 hover:bg-violet-100/50 transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-['Space_Grotesk'] font-bold text-lg text-violet-700 dark:text-violet-300 tracking-tight">Feria de Ciencias</h1>
+<button class="p-2 text-violet-600 dark:text-violet-400 hover:bg-violet-100/50 transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-32 px-4 max-w-md mx-auto min-h-screen relative overflow-hidden">
+<!-- Background Orbs -->
+<div class="absolute top-[-10%] right-[-20%] w-64 h-64 bg-primary/20 rounded-full blur-3xl -z-10"></div>
+<div class="absolute bottom-[20%] left-[-20%] w-80 h-80 bg-secondary/15 rounded-full blur-3xl -z-10"></div>
+<!-- Project Hero Card -->
+<section class="mb-6 space-y-4">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden shadow-xl refractive-boundary">
+<img alt="Scientific experiment" class="w-full h-full object-cover" data-alt="High-detail close-up of a laboratory physics experiment with purple laser beams refracting through glass prisms in a dark room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB04LTerEjPerIjvaEjZ-nFA2WpIergSLy1qvpeJUf_uv6IjsE4AupItNEhb1pismFhBcI2LE8XAdbjRWapJU_0E4WT8Obpa9fEQIzDXcIzWvI2qm8VqmXtwXXErZPTXfibVYZBFZa6KVbgRB1J11xWfNicRVCU3IAb2KDF8pwNPtOduz_CDdyXnCIuflNSS_lhfQ4TVAwkQDyzXrLTjhbGoDGvVbw4uLvKC_e1FsJZVxGAulJISjOHybNSEV0_sY5h2JHj-phe-0XN"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<span class="px-3 py-1 bg-secondary text-on-secondary rounded-full text-xs font-bold uppercase tracking-widest mb-2 inline-block">Fisica</span>
+<h2 class="font-headline text-2xl font-bold text-white leading-tight">Espectroscopía de Prismas</h2>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="p-4 rounded-lg bg-white/40 backdrop-blur-md refractive-boundary flex flex-col items-center justify-center">
+<span class="text-on-surface-variant text-[10px] font-bold uppercase tracking-tighter">Grupo</span>
+<span class="text-primary font-headline font-bold text-xl">2B</span>
+</div>
+<div class="p-4 rounded-lg bg-white/40 backdrop-blur-md refractive-boundary flex flex-col items-center justify-center">
+<span class="text-on-surface-variant text-[10px] font-bold uppercase tracking-tighter">Stand</span>
+<span class="text-tertiary font-headline font-bold text-xl">#42</span>
+</div>
+</div>
+</section>
+<!-- Trivia Section -->
+<section class="space-y-4">
+<div class="flex items-center justify-between px-2">
+<h3 class="font-headline font-bold text-xl text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">psychology</span>
+                    Trivia
+                </h3>
+<div class="flex items-center gap-2 bg-primary/10 text-primary px-3 py-1.5 rounded-full border border-primary/20">
+<span class="material-symbols-outlined text-sm font-bold">timer</span>
+<span class="font-headline font-bold">00:59</span>
+</div>
+</div>
+<div class="p-6 rounded-lg liquid-glass refractive-boundary space-y-6 shadow-lg">
+<div class="space-y-2">
+<span class="text-[10px] font-bold text-primary-dim uppercase tracking-widest">Pregunta 1 de 5</span>
+<p class="font-headline text-lg font-medium leading-relaxed text-on-surface">¿Qué fenómeno óptico ocurre cuando la luz blanca se separa en colores al pasar por un prisma?</p>
+</div>
+<div class="space-y-3">
+<button class="w-full text-left p-4 rounded-lg border-2 border-transparent bg-white/60 hover:bg-white hover:border-primary/30 transition-all group flex items-center justify-between active:scale-[0.98]">
+<span class="font-medium text-on-surface-variant group-hover:text-primary transition-colors">A. Reflexión interna</span>
+<span class="material-symbols-outlined text-transparent group-hover:text-primary/40">radio_button_unchecked</span>
+</button>
+<button class="w-full text-left p-4 rounded-lg border-2 border-primary bg-primary/10 flex items-center justify-between shadow-md shadow-primary/10">
+<span class="font-bold text-primary">B. Dispersión refractiva</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+<button class="w-full text-left p-4 rounded-lg border-2 border-transparent bg-white/60 hover:bg-white hover:border-primary/30 transition-all group flex items-center justify-between active:scale-[0.98]">
+<span class="font-medium text-on-surface-variant group-hover:text-primary transition-colors">C. Difracción simple</span>
+<span class="material-symbols-outlined text-transparent group-hover:text-primary/40">radio_button_unchecked</span>
+</button>
+<button class="w-full text-left p-4 rounded-lg border-2 border-transparent bg-white/60 hover:bg-white hover:border-primary/30 transition-all group flex items-center justify-between active:scale-[0.98]">
+<span class="font-medium text-on-surface-variant group-hover:text-primary transition-colors">D. Absorción opaca</span>
+<span class="material-symbols-outlined text-transparent group-hover:text-primary/40">radio_button_unchecked</span>
+</button>
+</div>
+</div>
+<button class="w-full py-5 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-headline font-bold text-lg shadow-xl shadow-primary/20 active:scale-95 transition-all flex items-center justify-center gap-2">
+                Siguiente Pregunta
+                <span class="material-symbols-outlined">trending_flat</span>
+</button>
+</section>
+</main>
+<!-- Footer Marquee -->
+<footer class="w-full py-1 mb-20 bg-cyan-500/10 dark:bg-cyan-900/20 backdrop-blur-sm fixed bottom-20 z-40 overflow-hidden">
+<div class="flex items-center whitespace-nowrap animate-marquee">
+<p class="font-['Inter'] italic text-[11px] text-cyan-600 dark:text-cyan-300 px-4">
+                Diseñado por Prof. Hugo Sanchez — Escuela Secundaria Técnica — Feria de Ciencias 2024 — Innovación Estudiantil — 
+                Diseñado por Prof. Hugo Sanchez — Escuela Secundaria Técnica — Feria de Ciencias 2024 — Innovación Estudiantil —
+            </p>
+</div>
+</footer>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-[2rem] z-50 pb-safe bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<div class="flex justify-around items-end px-4 pb-4 w-full h-20">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-violet-500 transition-all active:scale-90 duration-300">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider mt-1">Módulos</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-violet-500 transition-all active:scale-90 duration-300">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider mt-1">Progreso</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-gradient-to-br from-violet-500 to-cyan-400 text-white rounded-full p-3 mb-1 scale-110 shadow-lg shadow-violet-500/30 active:scale-90 transition-all duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider mt-1">Ranking</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-violet-500 transition-all active:scale-90 duration-300">
+<span class="material-symbols-outlined">map</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider mt-1">Mapa</span>
+</div>
+</div>
+</nav>
+</body></html>

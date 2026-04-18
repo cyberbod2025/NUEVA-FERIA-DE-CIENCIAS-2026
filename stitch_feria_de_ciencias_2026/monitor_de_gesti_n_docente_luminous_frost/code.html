@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Science Fair Live - Teacher Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#360024",
+                    "surface-container": "#dfeaf2",
+                    "inverse-surface": "#070f14",
+                    "primary-fixed-dim": "#9481ff",
+                    "on-background": "#283035",
+                    "on-surface-variant": "#545d62",
+                    "on-tertiary-container": "#620044",
+                    "inverse-primary": "#917eff",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#eff7fe",
+                    "on-secondary-fixed": "#004346",
+                    "error": "#b41340",
+                    "on-error-container": "#510017",
+                    "on-surface": "#283035",
+                    "on-secondary-fixed-variant": "#006266",
+                    "on-secondary-container": "#00575b",
+                    "on-primary-container": "#210077",
+                    "surface-bright": "#eff7fe",
+                    "surface-variant": "#d2dee8",
+                    "inverse-on-surface": "#969ea4",
+                    "on-primary-fixed": "#000000",
+                    "on-primary": "#f6f0ff",
+                    "primary": "#5a3bdd",
+                    "secondary-dim": "#00595d",
+                    "tertiary-fixed": "#ff8acb",
+                    "primary-fixed": "#a292ff",
+                    "surface-tint": "#5a3bdd",
+                    "surface-container-high": "#d9e4ed",
+                    "tertiary-dim": "#8a2966",
+                    "secondary-fixed": "#02f4fe",
+                    "tertiary-fixed-dim": "#ef7dbd",
+                    "outline-variant": "#a6aeb5",
+                    "outline": "#70787e",
+                    "primary-container": "#a292ff",
+                    "on-error": "#ffefef",
+                    "secondary": "#00666a",
+                    "surface": "#eff7fe",
+                    "on-primary-fixed-variant": "#2a0090",
+                    "tertiary": "#993572",
+                    "on-tertiary": "#ffeff4",
+                    "secondary-fixed-dim": "#00e5ee",
+                    "on-secondary": "#c9fcff",
+                    "surface-container-low": "#e9f2fa",
+                    "tertiary-container": "#ff8acb",
+                    "secondary-container": "#02f4fe",
+                    "surface-dim": "#c9d6e0",
+                    "on-tertiary-fixed-variant": "#6d0e4e",
+                    "error-container": "#f74b6d",
+                    "surface-container-highest": "#d2dee8",
+                    "primary-dim": "#4e2bd1",
+                    "error-dim": "#a70138"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Orbitron", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1.5px solid rgba(166, 174, 181, 0.15);
+        }
+        .mesh-bg {
+            background: radial-gradient(at 0% 0%, #a292ff 0px, transparent 50%),
+                        radial-gradient(at 100% 0%, #02f4fe 0px, transparent 50%),
+                        radial-gradient(at 100% 100%, #ff8acb 0px, transparent 50%),
+                        radial-gradient(at 0% 100%, #5a3bdd 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        .grid-glow-hot {
+            box-shadow: 0 0 20px rgba(247, 75, 109, 0.4);
+            background: linear-gradient(135deg, #f74b6d 0%, #b41340 100%);
+        }
+        .grid-glow-cool {
+            box-shadow: 0 0 15px rgba(2, 244, 254, 0.3);
+            background: linear-gradient(135deg, #02f4fe 0%, #5a3bdd 100%);
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(90, 59, 221, 0.2); border-radius: 10px; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body min-h-screen mesh-bg selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-6 py-4 bg-blue-50/40 dark:bg-slate-900/40 backdrop-blur-2xl shadow-[0_40px_60px_-15px_rgba(90,59,221,0.08)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-indigo-600 dark:text-indigo-400 text-3xl">timer</span>
+<h1 class="text-2xl font-bold tracking-wider text-indigo-700 dark:text-indigo-300 font-headline">Science Fair Live</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex items-center gap-8 text-slate-500 dark:text-slate-400 font-semibold">
+<a class="text-indigo-700 dark:text-indigo-300 font-bold hover:bg-indigo-50/50 transition-all duration-300 px-3 py-1 rounded-lg" href="#">Dashboard</a>
+<a class="hover:bg-indigo-50/50 transition-all duration-300 px-3 py-1 rounded-lg" href="#">Live Map</a>
+<a class="hover:bg-indigo-50/50 transition-all duration-300 px-3 py-1 rounded-lg" href="#">Rankings</a>
+</nav>
+<button class="material-symbols-outlined text-indigo-600 dark:text-indigo-400 text-2xl hover:bg-indigo-50/50 transition-all duration-300 p-2 rounded-full scale-95 active:scale-90">settings</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-4 md:px-8 max-w-7xl mx-auto space-y-6">
+<!-- 1. Session Overview Header -->
+<section class="glass-panel rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+<div class="absolute -top-24 -left-24 w-64 h-64 bg-secondary-container opacity-20 blur-[100px]"></div>
+<div class="flex flex-col gap-1 z-10">
+<span class="text-xs uppercase tracking-[0.2em] font-bold text-primary opacity-70">Current Session</span>
+<h2 class="text-4xl font-headline font-black text-on-surface">Time Remaining: 1h 45m</h2>
+<div class="w-full bg-surface-container rounded-full h-3 mt-4 overflow-hidden border border-outline-variant/10">
+<div class="bg-gradient-to-r from-primary to-secondary-container h-full w-[12.5%]" style="width: 12.5%;"></div>
+</div>
+</div>
+<div class="flex items-center gap-12 z-10">
+<div class="text-center">
+<p class="text-sm font-semibold text-outline mb-1 uppercase tracking-widest">Avg Stand Time</p>
+<p class="text-3xl font-headline font-bold text-primary">4.2 <span class="text-sm font-body">min</span></p>
+</div>
+<div class="text-center">
+<p class="text-sm font-semibold text-outline mb-1 uppercase tracking-widest">Active Students</p>
+<p class="text-3xl font-headline font-bold text-secondary-dim">482 <span class="text-sm font-body">/ 500</span></p>
+</div>
+</div>
+</section>
+<!-- Main Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- 2. Real-time Heatmap (Center Piece) -->
+<section class="lg:col-span-8 glass-panel rounded-xl p-6">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">explore</span>
+                        Stand Occupancy Matrix
+                    </h3>
+<div class="flex items-center gap-4 text-xs font-bold uppercase tracking-tighter">
+<span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-error"></span> High</span>
+<span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-secondary-container"></span> Low</span>
+</div>
+</div>
+<div class="grid grid-cols-4 sm:grid-cols-7 gap-3">
+<!-- Stand Grid Generation -->
+<!-- Row 1 -->
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S1</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S2</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-hot text-white">S3</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S4</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S5</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-hot text-white">S6</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S7</div>
+<!-- Row 2 -->
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-hot text-white">S8</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S9</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S10</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S11</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-hot text-white">S12</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S13</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S14</div>
+<!-- Row 3 -->
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S15</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-hot text-white border-2 border-primary">S16</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S17</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S18</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S19</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S20</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-hot text-white">S21</div>
+<!-- Row 4 -->
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S22</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S23</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S24</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-hot text-white">S25</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S26</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S27</div>
+<div class="aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] font-bold grid-glow-cool text-white">S28</div>
+</div>
+<!-- 4. Alert Control Center (Embedded) -->
+<div class="mt-10 border-t border-outline-variant/10 pt-8">
+<h4 class="text-sm font-bold uppercase tracking-widest text-primary mb-4">Command Center</h4>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-white rounded-full px-6 py-3 font-bold text-sm flex items-center gap-2 shadow-[0_0_20px_rgba(90,59,221,0.3)] hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-base">campaign</span> Broadcast: Time to Move!
+                        </button>
+<button class="bg-secondary-container/20 text-on-secondary-container rounded-full px-6 py-3 font-bold text-sm flex items-center gap-2 hover:bg-secondary-container/30 transition-all">
+<span class="material-symbols-outlined text-base">quiz</span> Complete your Trivia
+                        </button>
+<button class="bg-tertiary-container/20 text-on-tertiary-container rounded-full px-6 py-3 font-bold text-sm flex items-center gap-2 hover:bg-tertiary-container/30 transition-all">
+<span class="material-symbols-outlined text-base">pin_drop</span> Redirect to Stand #15
+                        </button>
+</div>
+</div>
+</section>
+<!-- Sidebar Column -->
+<div class="lg:col-span-4 space-y-6">
+<!-- 3. Student Ranking & Progress List -->
+<section class="glass-panel rounded-xl p-6 flex flex-col h-[400px]">
+<h3 class="font-headline text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">leaderboard</span>
+                        Top Explorers
+                    </h3>
+<div class="overflow-y-auto custom-scrollbar flex-grow space-y-3 pr-2">
+<!-- Student Item -->
+<div class="bg-surface-container-low/50 p-3 rounded-lg flex items-center justify-between border border-white/10">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-secondary-container flex items-center justify-center text-xs font-black text-white">1</span>
+<div>
+<p class="text-sm font-bold">Liam Chen</p>
+<p class="text-[10px] text-outline uppercase font-semibold">Group Beta-9</p>
+</div>
+</div>
+<span class="text-xs font-black text-primary bg-primary/10 px-2 py-1 rounded">24/28</span>
+</div>
+<!-- Student Item -->
+<div class="bg-surface-container-low/50 p-3 rounded-lg flex items-center justify-between border border-white/10">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-xs font-black text-outline">2</span>
+<div>
+<p class="text-sm font-bold">Sophia Rossi</p>
+<p class="text-[10px] text-outline uppercase font-semibold">Group Gamma-4</p>
+</div>
+</div>
+<span class="text-xs font-black text-primary bg-primary/10 px-2 py-1 rounded">21/28</span>
+</div>
+<!-- Student Item -->
+<div class="bg-surface-container-low/50 p-3 rounded-lg flex items-center justify-between border border-white/10">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-xs font-black text-outline">3</span>
+<div>
+<p class="text-sm font-bold">Marcus Wright</p>
+<p class="text-[10px] text-outline uppercase font-semibold">Group Alpha-1</p>
+</div>
+</div>
+<span class="text-xs font-black text-primary bg-primary/10 px-2 py-1 rounded">19/28</span>
+</div>
+<!-- Student Item -->
+<div class="bg-surface-container-low/50 p-3 rounded-lg flex items-center justify-between border border-white/10">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-xs font-black text-outline">4</span>
+<div>
+<p class="text-sm font-bold">Aaliyah Khan</p>
+<p class="text-[10px] text-outline uppercase font-semibold">Group Delta-7</p>
+</div>
+</div>
+<span class="text-xs font-black text-primary bg-primary/10 px-2 py-1 rounded">18/28</span>
+</div>
+</div>
+</section>
+<!-- 5. Flow Alerts -->
+<section class="glass-panel rounded-xl p-6 bg-error-container/5 border-error/10">
+<h3 class="font-headline text-lg font-bold mb-4 text-error flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+                        Flow Disruptions
+                    </h3>
+<div class="space-y-4">
+<div class="flex gap-4 items-start p-3 bg-white/40 rounded-lg">
+<span class="material-symbols-outlined text-error text-xl pt-1">group</span>
+<div>
+<p class="text-sm font-black text-on-error-container">Critical Density: Stand #16</p>
+<p class="text-xs text-outline leading-tight">32 students detected. Suggested reroute to Stand #4.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start p-3 bg-white/40 rounded-lg">
+<span class="material-symbols-outlined text-primary text-xl pt-1">timer_off</span>
+<div>
+<p class="text-sm font-black text-on-surface">Inactive: J. Miller (5m+)</p>
+<p class="text-xs text-outline leading-tight">Stationary near main hall. Auto-ping sent.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-white/30 dark:bg-slate-950/30 backdrop-blur-3xl rounded-t-[3rem] shadow-2xl">
+<div class="flex flex-col items-center justify-center bg-gradient-to-tr from-indigo-600 to-cyan-400 text-white rounded-full p-3 shadow-[0_0_20px_rgba(90,59,221,0.4)] transition-opacity hover:opacity-80">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="text-[11px] uppercase tracking-widest font-semibold font-label">Live Map</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-600 dark:text-slate-400 p-3 transition-opacity hover:opacity-80">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span class="text-[11px] uppercase tracking-widest font-semibold font-label">Rankings</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-600 dark:text-slate-400 p-3 transition-opacity hover:opacity-80">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+<span class="text-[11px] uppercase tracking-widest font-semibold font-label">Alerts</span>
+</div>
+</nav>
+</body></html>

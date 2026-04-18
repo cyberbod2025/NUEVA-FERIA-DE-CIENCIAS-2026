@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mapa de Progreso - Feria de Ciencias</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .refractive-boundary {
+            backdrop-filter: blur(20px);
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            display: inline-block;
+            animation: marquee 15s linear infinite;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#eff7fe",
+                        "on-surface": "#283035",
+                        "surface-container": "#dfeaf2",
+                        "surface-variant": "#d2dee8",
+                        "tertiary": "#a12b76",
+                        "primary-container": "#a192ff",
+                        "surface": "#eff7fe",
+                        "secondary": "#00666a",
+                        "tertiary-container": "#ff8acb",
+                        "primary": "#5a3bdd",
+                        "background": "#eff7fe"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-surface min-h-screen overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(123,97,255,0.08)]">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-md mx-auto">
+<button class="text-violet-600 dark:text-violet-400 hover:bg-violet-100/50 transition-all active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+</button>
+<h1 class="font-['Space_Grotesk'] font-bold text-lg text-violet-700 dark:text-violet-300 tracking-tight">Feria de Ciencias</h1>
+<button class="text-violet-600 dark:text-violet-400 hover:bg-violet-100/50 transition-all active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-32 px-4 max-w-md mx-auto relative">
+<!-- Background Orbs for Luminous Refraction -->
+<div class="fixed top-20 -left-20 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none"></div>
+<div class="fixed bottom-40 -right-20 w-80 h-80 bg-secondary/15 rounded-full blur-[100px] pointer-events-none"></div>
+<!-- Page Title & Progress Overview -->
+<section class="mb-8 relative z-10">
+<h2 class="font-headline text-3xl font-bold text-primary mb-2">Mapa de Progreso</h2>
+<div class="glass-card p-5 rounded-lg flex items-center justify-between shadow-sm">
+<div>
+<p class="text-sm font-semibold text-on-surface/70 uppercase tracking-widest mb-1">Módulos Visitados</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline font-bold text-primary">12</span>
+<span class="text-xl font-headline text-on-surface/40">/ 28</span>
+</div>
+</div>
+<div class="h-16 w-16 relative">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-primary" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="100.5" stroke-width="6"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-primary">42%</div>
+</div>
+</div>
+</section>
+<!-- Progress Map Grid (28 Modules) -->
+<section class="grid grid-cols-4 gap-4 relative z-10">
+<!-- Module Item Loop Simulation (28 modules) -->
+<!-- Rendered 1-12 as visited, 13-28 as pending -->
+<!-- Visited Modules (12 items) -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-full aspect-square rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-lg shadow-primary/20 transition-transform active:scale-90">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="font-label text-[10px] font-bold text-primary">MOD 01</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-full aspect-square rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-lg shadow-primary/20 transition-transform active:scale-90">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</div>
+<span class="font-label text-[10px] font-bold text-primary">MOD 02</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-full aspect-square rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-lg shadow-primary/20 transition-transform active:scale-90">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">biotech</span>
+</div>
+<span class="font-label text-[10px] font-bold text-primary">MOD 03</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-full aspect-square rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-lg shadow-primary/20 transition-transform active:scale-90">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<span class="font-label text-[10px] font-bold text-primary">MOD 04</span>
+</div>
+<!-- More Visited (Truncated visualization) -->
+<div class="col-span-4 grid grid-cols-4 gap-4">
+<div class="flex flex-col items-center gap-2">
+<div class="w-full aspect-square rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<span class="font-label text-[10px] font-bold text-primary">MOD 05</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-full aspect-square rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<span class="font-label text-[10px] font-bold text-primary">MOD 06</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-full aspect-square rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">opacity</span>
+</div>
+<span class="font-label text-[10px] font-bold text-primary">MOD 07</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-full aspect-square rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+</div>
+<span class="font-label text-[10px] font-bold text-primary">MOD 08</span>
+</div>
+</div>
+<!-- Pending Modules (16 items) -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-full aspect-square rounded-full bg-white/60 backdrop-blur-md border-2 border-dashed border-primary/20 flex items-center justify-center text-on-surface/30">
+<span class="material-symbols-outlined text-xl">science</span>
+</div>
+<span class="font-label text-[10px] font-bold text-on-surface/40">MOD 13</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-full aspect-square rounded-full bg-white/60 backdrop-blur-md border-2 border-dashed border-primary/20 flex items-center justify-center text-on-surface/30">
+<span class="material-symbols-outlined text-xl">device_thermostat</span>
+</div>
+<span class="font-label text-[10px] font-bold text-on-surface/40">MOD 14</span>
+</div>
+<!-- Representing the rest of the 28 grid -->
+<div class="col-span-4 grid grid-cols-4 gap-4 mt-2">
+<div class="flex flex-col items-center gap-2 opacity-60">
+<div class="w-full aspect-square rounded-full bg-white/40 border border-on-surface/10 flex items-center justify-center text-on-surface/20">
+<span class="text-xs font-bold font-headline">15</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-2 opacity-60">
+<div class="w-full aspect-square rounded-full bg-white/40 border border-on-surface/10 flex items-center justify-center text-on-surface/20">
+<span class="text-xs font-bold font-headline">16</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-2 opacity-60">
+<div class="w-full aspect-square rounded-full bg-white/40 border border-on-surface/10 flex items-center justify-center text-on-surface/20">
+<span class="text-xs font-bold font-headline">17</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-2 opacity-60">
+<div class="w-full aspect-square rounded-full bg-white/40 border border-on-surface/10 flex items-center justify-center text-on-surface/20">
+<span class="text-xs font-bold font-headline">18</span>
+</div>
+</div>
+</div>
+<!-- Illustrative Map Connection -->
+<div class="col-span-4 mt-6">
+<div class="relative w-full h-48 rounded-lg overflow-hidden glass-card">
+<img alt="vibrant stylized isometric map of a science fair venue with glowing markers and paths in lavender and cyan tones" class="w-full h-full object-cover opacity-80" data-location="Feria de Ciencias Hall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP8UXO6cEihK0Ih8XdsZ4vWwm7yWDQvsn7Xk0YLyvyzJFuiNI6IE1WeR4e9IQ675JbmlcQ0ncJVwLUo5pLTNVPDIKzYippxhbZ2kMi_U4mFl6NQuzXjR5FULzL5z2WoiXwezmaDYOJxN1cfdIFMWwtQll7JHZVo9f6xjV6t2IMuMYBaZUrL9YXLhzkEseDGH40Rzyhqy4CRsfIOSaA99YPVfDHBuZTu-bMdQhC3mKqjGyrUxyAnmvmA3PlEakipj96bKXykxVXZlG_"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-2">
+<div class="bg-primary text-white p-2 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-sm">my_location</span>
+</div>
+<span class="text-sm font-bold text-primary">Estás cerca del Módulo 13</span>
+</div>
+</div>
+</div>
+<!-- Finish the 28 module count with smaller indicators -->
+<div class="col-span-4 grid grid-cols-5 gap-3 mt-4 opacity-40">
+<div class="aspect-square bg-surface-container rounded-full flex items-center justify-center text-[8px] font-bold">19</div>
+<div class="aspect-square bg-surface-container rounded-full flex items-center justify-center text-[8px] font-bold">20</div>
+<div class="aspect-square bg-surface-container rounded-full flex items-center justify-center text-[8px] font-bold">21</div>
+<div class="aspect-square bg-surface-container rounded-full flex items-center justify-center text-[8px] font-bold">22</div>
+<div class="aspect-square bg-surface-container rounded-full flex items-center justify-center text-[8px] font-bold">23</div>
+<div class="aspect-square bg-surface-container rounded-full flex items-center justify-center text-[8px] font-bold">24</div>
+<div class="aspect-square bg-surface-container rounded-full flex items-center justify-center text-[8px] font-bold">25</div>
+<div class="aspect-square bg-surface-container rounded-full flex items-center justify-center text-[8px] font-bold">26</div>
+<div class="aspect-square bg-surface-container rounded-full flex items-center justify-center text-[8px] font-bold">27</div>
+<div class="aspect-square bg-surface-container rounded-full flex items-center justify-center text-[8px] font-bold">28</div>
+</div>
+</section>
+</main>
+<!-- Footer Marquee -->
+<footer class="w-full py-1 mb-20 bg-cyan-500/10 dark:bg-cyan-900/20 backdrop-blur-sm fixed bottom-20 z-40 overflow-hidden whitespace-nowrap">
+<div class="flex items-center animate-marquee">
+<span class="font-['Inter'] italic text-[11px] text-cyan-600 dark:text-cyan-300 mx-4">APP DISEÑADA POR HUGO SANCHEZ</span>
+<span class="font-['Inter'] italic text-[11px] text-cyan-600 dark:text-cyan-300 mx-4 underline font-bold">Escuela Secundaria Técnica</span>
+<span class="font-['Inter'] italic text-[11px] text-cyan-600 dark:text-cyan-300 mx-4">APP DISEÑADA POR HUGO SANCHEZ</span>
+<span class="font-['Inter'] italic text-[11px] text-cyan-600 dark:text-cyan-300 mx-4 underline font-bold">Escuela Secundaria Técnica</span>
+</div>
+</footer>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-[2rem] z-50 pb-safe bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl shadow-2xl">
+<div class="flex justify-around items-end px-4 pb-4 w-full h-20 max-w-md mx-auto">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-violet-500 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider">Módulos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-violet-500 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider">Progreso</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-violet-500 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider">Ranking</span>
+</a>
+<!-- Active State: Mapa -->
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-violet-500 to-cyan-400 text-white rounded-full p-3 mb-1 scale-110 shadow-lg shadow-violet-500/30 active:scale-90 transition-transform duration-300 cubic-bezier(0.34, 1.56, 0.64, 1)" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider">Mapa</span>
+</a>
+</div>
+</nav>
+</body></html>

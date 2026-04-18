@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Luminous Science - Global Ranking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#f6f0ff",
+                    "surface-bright": "#eff7fe",
+                    "tertiary-fixed": "#ff8acb",
+                    "on-error": "#ffefef",
+                    "surface-container-low": "#e9f2fa",
+                    "on-secondary": "#c9fcff",
+                    "secondary-fixed": "#02f4fe",
+                    "inverse-primary": "#917eff",
+                    "primary-dim": "#4e2bd1",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-dim": "#8a2966",
+                    "primary-fixed-dim": "#9481ff",
+                    "tertiary-fixed-dim": "#ef7dbd",
+                    "on-primary-fixed": "#000000",
+                    "tertiary-container": "#ff8acb",
+                    "outline-variant": "#a6aeb5",
+                    "primary": "#5a3bdd",
+                    "surface-container-high": "#d9e4ed",
+                    "secondary-dim": "#00595d",
+                    "on-tertiary-fixed": "#360024",
+                    "secondary-container": "#02f4fe",
+                    "on-tertiary-fixed-variant": "#6d0e4e",
+                    "surface": "#eff7fe",
+                    "primary-fixed": "#a292ff",
+                    "tertiary": "#993572",
+                    "error": "#b41340",
+                    "background": "#eff7fe",
+                    "error-container": "#f74b6d",
+                    "on-secondary-fixed": "#004346",
+                    "inverse-on-surface": "#969ea4",
+                    "surface-container-highest": "#d2dee8",
+                    "surface-dim": "#c9d6e0",
+                    "outline": "#70787e",
+                    "on-background": "#283035",
+                    "on-tertiary-container": "#620044",
+                    "on-surface-variant": "#545d62",
+                    "on-secondary-container": "#00575b",
+                    "on-error-container": "#510017",
+                    "secondary": "#00666a",
+                    "surface-variant": "#d2dee8",
+                    "surface-container": "#dfeaf2",
+                    "on-secondary-fixed-variant": "#006266",
+                    "on-surface": "#283035",
+                    "on-tertiary": "#ffeff4",
+                    "secondary-fixed-dim": "#00e5ee",
+                    "on-primary-fixed-variant": "#2a0090",
+                    "on-primary-container": "#210077",
+                    "error-dim": "#a70138",
+                    "surface-tint": "#5a3bdd",
+                    "primary-container": "#a292ff",
+                    "inverse-surface": "#070f14"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background: radial-gradient(circle at 0% 0%, #ffffff 0%, #eff7fe 50%, #d2dee8 100%);
+            min-height: 100vh;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 25px rgba(90, 59, 221, 0.3);
+        }
+        .neon-glow-secondary {
+            box-shadow: 0 0 25px rgba(2, 244, 254, 0.3);
+        }
+        .neon-glow-tertiary {
+            box-shadow: 0 0 25px rgba(255, 138, 203, 0.3);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .mesh-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-on-surface antialiased">
+<!-- Mesh Background Orbs -->
+<div class="mesh-bg">
+<div class="orb bg-primary w-[500px] h-[500px] -top-40 -left-40"></div>
+<div class="orb bg-secondary-container w-[400px] h-[400px] top-1/2 -right-20"></div>
+<div class="orb bg-tertiary-container w-[300px] h-[300px] bottom-0 left-1/4"></div>
+</div>
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 bg-white/30 dark:bg-slate-900/30 backdrop-blur-xl border-b border-white/10 dark:border-white/5 shadow-[0_8px_32px_0_rgba(90,59,221,0.08)]">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary-container p-[2px]">
+<img alt="User Profile Avatar" class="w-full h-full rounded-full object-cover" data-alt="close-up portrait of a professional man in a bright modern office with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_aB3AhwzNWQtabcLwT7Vm-DnZkxaA9NpI2j5BYtz0BFHO0VvbsbQLu6mv8uVNpLLJQ4Bf8mSGmu2hZ3tgFR-minK7uBg_rxo8cdyId4M8kmaPL2nUOBfA3F4lvE2wWqouXL4VWu4w3GXM8PCRFPEHI7KmG8mt_7Hi5uNvDqR6PBR4tPFg9GflwWhlEigwmj1MBFIf1wwNpWRlChzW0KwUChrNPPwTDSA252L_1NOgoOtoMrdqonnqD-9tsNwtUVVIDKZ_sPiWCi57"/>
+</div>
+<span class="font-['Orbitron'] font-bold tracking-tight text-xl font-black text-[#5a3bdd] dark:text-[#a192ff] drop-shadow-sm">Luminous Science</span>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-500 dark:text-slate-400 hover:bg-white/20 transition-all duration-300 px-3 py-1 rounded-full" href="#">Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 hover:bg-white/20 transition-all duration-300 px-3 py-1 rounded-full" href="#">Scanner</a>
+<a class="text-[#5a3bdd] font-bold hover:bg-white/20 transition-all duration-300 px-3 py-1 rounded-full" href="#">Ranking</a>
+<a class="text-slate-500 dark:text-slate-400 hover:bg-white/20 transition-all duration-300 px-3 py-1 rounded-full" href="#">Teacher</a>
+</nav>
+<button class="material-symbols-outlined text-[#5a3bdd] dark:text-[#a192ff] p-2 rounded-full hover:bg-white/20 transition-all">settings</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-4 max-w-3xl mx-auto">
+<!-- Headline Section -->
+<section class="text-center mb-12">
+<h1 class="font-headline text-5xl font-bold tracking-tighter text-on-surface mb-2">Global Rankings</h1>
+<p class="text-outline font-medium tracking-wide uppercase text-sm">Season 12: The Quantum Leap</p>
+</section>
+<!-- Podium: Top 3 Floating Capsules -->
+<section class="flex justify-center items-end gap-4 mb-16 relative">
+<!-- Rank 2 -->
+<div class="flex flex-col items-center group">
+<div class="glass-panel neon-glow-secondary w-24 h-48 rounded-full flex flex-col items-center justify-start pt-4 transition-transform group-hover:-translate-y-2">
+<div class="w-16 h-16 rounded-full border-2 border-secondary-container p-1 mb-4 relative">
+<img class="w-full h-full rounded-full object-cover" data-alt="cheerful young woman with a radiant smile in a soft focus natural outdoor setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcSGB_BAu4QHnVHugNLUcdE4KUoZ1nDUJTLE93pA2aDddjlRGOhY5h5cuz4bv1iDIZ0W9qyLr8I8wAi8Z562rJCxYDJbeW3XXBX7VYDp-T4C3A_IBWoMJv_aDYTnKTQ4tqcwt3uYV2uYBXZBWv5j3_CMGBKE8zHTO4X82yLwYL-YsOxiL-sCzJ3LvYV5yxFIUDYgQ5qemxO9bj3qITklj8T94_W0zps2x5FvXHxQFZ0w6_moBQpvmHSpQi_FrWKUhnSJOL__Cf0lF2"/>
+<div class="absolute -bottom-1 -right-1 bg-secondary-container text-on-secondary-container w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold">2</div>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-secondary-dim px-2 text-center truncate w-full">Elena.V</span>
+<span class="text-lg font-headline font-bold text-secondary-dim">12,402</span>
+</div>
+</div>
+<!-- Rank 1 -->
+<div class="flex flex-col items-center group -mt-8">
+<div class="glass-panel neon-glow-primary w-32 h-64 rounded-full flex flex-col items-center justify-start pt-6 border-primary/20 transition-transform group-hover:-translate-y-3">
+<div class="absolute -top-6 text-primary drop-shadow-[0_0_10px_rgba(90,59,221,0.5)]">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div class="w-22 h-22 rounded-full border-4 border-primary p-1 mb-6 relative">
+<img class="w-full h-full rounded-full object-cover" data-alt="handsome man with a warm expression and stylish hair against a soft blue studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoXVPpIjknHUW8qc_hHdLTNicgrWxzbWV57jWIa4916FRQ7dYYTFMObF0gDDRSZ9i2HA7mNYAq5q5gM5vbCdBjv3Z213tJuyW41q9zjODPRXdRutC5DDzZuSlS5v_3Mizp0XFj05oFhz_hRH5EgscEKn6JWgtYH1Gtyi4lX1rFiStzxAQAIWbWiviF7ot_nc2TtgAxKEYL34OVnAe2RZ5_FaMOwHdvqAhTb-p2FdXF24fpf124pJcsc_SxQrgDSfPdhgry34NN0agt"/>
+<div class="absolute -bottom-2 -right-2 bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shadow-lg">1</div>
+</div>
+<span class="text-xs font-bold uppercase tracking-widest text-primary px-2 text-center truncate w-full">Marcus.Tech</span>
+<span class="text-2xl font-headline font-black text-primary">15,890</span>
+<div class="mt-4 px-3 py-1 bg-primary/10 rounded-full">
+<span class="text-[9px] font-bold text-primary uppercase">Grandmaster</span>
+</div>
+</div>
+</div>
+<!-- Rank 3 -->
+<div class="flex flex-col items-center group">
+<div class="glass-panel neon-glow-tertiary w-24 h-40 rounded-full flex flex-col items-center justify-start pt-4 transition-transform group-hover:-translate-y-2">
+<div class="w-16 h-16 rounded-full border-2 border-tertiary-container p-1 mb-4 relative">
+<img class="w-full h-full rounded-full object-cover" data-alt="young man with a friendly face and glasses in a minimalist professional environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDizmW5T87tycObjcuN1oXnDeMQfVDKAtJTt33AWLm3zGHvRW0nPVqBcUcldwtPh52iSpAlVbstIRf4GbvBdH1-lJjsNYuUhq_P4OM8cqLr9schM-mlw7aM7KrjviPXgbFoJXtVdGj_-tULe-Iiy_22D7NiE8mMRNXWkzoaE9qGIO1DVHSst9zV4R9SaDBlFLYam8gOwKR7UebFDSbTwudp65v2jUViV1uQedjIvWMRegoLoPbdAF9ytDnaRCktBNspITj6RNAEkDB_"/>
+<div class="absolute -bottom-1 -right-1 bg-tertiary-container text-on-tertiary-container w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold">3</div>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-tertiary-dim px-2 text-center truncate w-full">S.Chen</span>
+<span class="text-lg font-headline font-bold text-tertiary-dim">11,150</span>
+</div>
+</div>
+</section>
+<!-- Leaderboard List -->
+<div class="space-y-4">
+<!-- Header for list -->
+<div class="flex items-center justify-between px-8 mb-4 text-outline font-bold text-[10px] uppercase tracking-[0.2em]">
+<span>Rank &amp; User</span>
+<span>Points</span>
+</div>
+<!-- Ranking Items -->
+<div class="glass-panel rounded-xl p-4 flex items-center justify-between group hover:bg-white/60 transition-colors">
+<div class="flex items-center gap-4">
+<span class="w-8 text-center font-headline font-bold text-on-surface-variant">4</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high p-[1px]">
+<img class="w-full h-full rounded-full object-cover" data-alt="portrait of a woman with a confident gaze in a soft lit studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPeBIQUG6gMV-rqUcXaJKwdj7dIYylceUxJosP-q0WtCoIF7s2PJoXQIn-MAyn3YK42MtVOKLRn2y0t1i2HhvOUVC2gdQjgBwaaPe-Fob7sI9AWIqxWcxOtLSOVER6EwPpuFgFAUeD_qS8V22qioM47rG4nSenn7mWK3iMIqf2-Ar8JfGZOJA2RaSRkQwJTz-xCbUlTxADuxO2VqYWOh5e7OlYG__Umr85A-Z3xFukwH9cptePjsxxPniw0cHQAUPqk_2I_uwNkf35"/>
+</div>
+<div>
+<p class="font-bold text-sm">Amara Okafor</p>
+<p class="text-[10px] text-outline uppercase font-semibold">Pro Researcher</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-primary">9,820</span>
+<span class="material-symbols-outlined text-green-500 text-sm">trending_up</span>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-4 flex items-center justify-between group hover:bg-white/60 transition-colors">
+<div class="flex items-center gap-4">
+<span class="w-8 text-center font-headline font-bold text-on-surface-variant">5</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high p-[1px]">
+<img class="w-full h-full rounded-full object-cover" data-alt="headshot of a young woman with a pleasant expression on a plain background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg5L205DVKogGgk9vP_Z1JAirjX8UzAjSiYJoqfHIAG05bJzzCse7-Rp7DGSNkcwmPTbWqC_d-gyBGpaLdiTDgZzmvVynkBsi7t_vDMVI1JYhMG0WAsQM4MTKtxbk7Bk8GiovcGzZodiTI7vCcwnPy33sXlgNY6_xflqB89DgawiboaNvBVhww6kuVMTDmvw3CcNQL5_yP7TKjefCbwuoxW2XFwNBlLa_wormNN3VT-IlBbUzjv0YoQQMh8FnXuDfKNaEwDy17Pjf4"/>
+</div>
+<div>
+<p class="font-bold text-sm">Sophie Müller</p>
+<p class="text-[10px] text-outline uppercase font-semibold">Senior Analyst</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-primary">8,740</span>
+<span class="material-symbols-outlined text-outline text-sm">horizontal_rule</span>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-4 flex items-center justify-between group hover:bg-white/60 transition-colors">
+<div class="flex items-center gap-4">
+<span class="w-8 text-center font-headline font-bold text-on-surface-variant">6</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high p-[1px]">
+<img class="w-full h-full rounded-full object-cover" data-alt="man with a friendly smile in a professional casual outfit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKdrWWHmmjlHt3TBQZ6Q7217bvAgG1Q1rU_gD37BJI0S-oUtZhAkPqhRssDVBtbcf7J7vcz47qovIKwrC1gw7rUYcfdfexJAEW3CgQiD03j6bXhJBWWMxkYRtkHrTnkEuSCoSwIJZZg98mn2DXjRrbwmIyyTby-XkQPLrQNsl3JCJ5J3SEj-2ty0u00BW5qC7kI_JM9c9CO1vlFCcd0FSC_2iX2nOl0Uu84CicImcDFLQK6ZRyaqlusDma2MLO3sNlp2bDV7-4HWaE"/>
+</div>
+<div>
+<p class="font-bold text-sm">David Park</p>
+<p class="text-[10px] text-outline uppercase font-semibold">Lab Assistant</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-primary">7,910</span>
+<span class="material-symbols-outlined text-red-500 text-sm">trending_down</span>
+</div>
+</div>
+<!-- Placeholder for scrolling many users -->
+<div class="py-12 text-center opacity-40">
+<div class="inline-block w-1 h-1 bg-outline rounded-full mx-1"></div>
+<div class="inline-block w-1 h-1 bg-outline rounded-full mx-1"></div>
+<div class="inline-block w-1 h-1 bg-outline rounded-full mx-1"></div>
+<p class="mt-4 text-[10px] font-bold uppercase tracking-widest">Showing Top 500 Participants</p>
+</div>
+</div>
+</main>
+<!-- Sticky Current Rank Card -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-lg z-40">
+<div class="bg-primary/90 backdrop-blur-3xl text-white rounded-2xl p-4 shadow-[0_20px_50px_rgba(90,59,221,0.4)] border border-white/20 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full border-2 border-white/30 p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="professional male portrait with bright soft lighting and modern office vibe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAynIT0cPDxRW3O2S_ekwUBLUnZc1ll4JgemVIHaNK0XrbHAROP_9btCkiZ3V8CviOMUbpAJn-jL2hA-bb4vR0mDrRE6jiGlJpPxO_WaxwIMXy_hSdTHq9Lk2cvJerwepirlGWA1TEY2Ywv6uqA5QF9tB31Ad34g3YfvtczQpwdOhmHkk6QpODPsa46nVG-7scfKds5gz2p6gq-wNaUoNHiznW3mE6BqXxSydGitOjQtiDAMTA1PT1CkxK9Qo-uY9FoUVWzCkP7JCyf"/>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-wider opacity-70">Your Current Rank</p>
+<p class="font-headline text-xl font-black flex items-center gap-2">
+                        #42 <span class="text-secondary-container text-xs tracking-normal">Top 8%</span>
+</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold uppercase tracking-wider opacity-70">Points</p>
+<p class="font-headline text-xl font-black text-secondary-container">4,285</p>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/40 dark:bg-slate-950/40 backdrop-blur-2xl border-t border-white/20 dark:border-white/10 rounded-t-[2rem] z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] md:hidden">
+<a class="flex flex-col items-center justify-center text-slate-600 dark:text-slate-400 p-2 hover:text-[#5a3bdd] dark:hover:text-[#00f4fe]" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-600 dark:text-slate-400 p-2 hover:text-[#5a3bdd] dark:hover:text-[#00f4fe]" href="#">
+<span class="material-symbols-outlined mb-1">qr_code_scanner</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider">Scanner</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#5a3bdd] text-white rounded-full px-5 py-2 shadow-[0_0_15px_rgba(90,59,221,0.4)]" href="#">
+<span class="material-symbols-outlined mb-1">leaderboard</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider">Ranking</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-600 dark:text-slate-400 p-2 hover:text-[#5a3bdd] dark:hover:text-[#00f4fe]" href="#">
+<span class="material-symbols-outlined mb-1">school</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider">Teacher</span>
+</a>
+</nav>
+</body></html>

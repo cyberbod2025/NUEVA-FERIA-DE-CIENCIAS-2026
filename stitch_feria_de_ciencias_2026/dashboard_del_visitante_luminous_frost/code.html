@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Luminous Science | Visitor Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#f6f0ff",
+                        "surface-bright": "#eff7fe",
+                        "tertiary-fixed": "#ff8acb",
+                        "on-error": "#ffefef",
+                        "surface-container-low": "#e9f2fa",
+                        "on-secondary": "#c9fcff",
+                        "secondary-fixed": "#02f4fe",
+                        "inverse-primary": "#917eff",
+                        "primary-dim": "#4e2bd1",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-dim": "#8a2966",
+                        "primary-fixed-dim": "#9481ff",
+                        "tertiary-fixed-dim": "#ef7dbd",
+                        "on-primary-fixed": "#000000",
+                        "tertiary-container": "#ff8acb",
+                        "outline-variant": "#a6aeb5",
+                        "primary": "#5a3bdd",
+                        "surface-container-high": "#d9e4ed",
+                        "secondary-dim": "#00595d",
+                        "on-tertiary-fixed": "#360024",
+                        "secondary-container": "#02f4fe",
+                        "on-tertiary-fixed-variant": "#6d0e4e",
+                        "surface": "#eff7fe",
+                        "primary-fixed": "#a292ff",
+                        "tertiary": "#993572",
+                        "error": "#b41340",
+                        "background": "#eff7fe",
+                        "error-container": "#f74b6d",
+                        "on-secondary-fixed": "#004346",
+                        "inverse-on-surface": "#969ea4",
+                        "surface-container-highest": "#d2dee8",
+                        "surface-dim": "#c9d6e0",
+                        "outline": "#70787e",
+                        "on-background": "#283035",
+                        "on-tertiary-container": "#620044",
+                        "on-surface-variant": "#545d62",
+                        "on-secondary-container": "#00575b",
+                        "on-error-container": "#510017",
+                        "secondary": "#00666a",
+                        "surface-variant": "#d2dee8",
+                        "surface-container": "#dfeaf2",
+                        "on-secondary-fixed-variant": "#006266",
+                        "on-surface": "#283035",
+                        "on-tertiary": "#ffeff4",
+                        "secondary-fixed-dim": "#00e5ee",
+                        "on-primary-fixed-variant": "#2a0090",
+                        "on-primary-container": "#210077",
+                        "error-dim": "#a70138",
+                        "surface-tint": "#5a3bdd",
+                        "primary-container": "#a292ff",
+                        "inverse-surface": "#070f14"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .mesh-gradient {
+            background-color: #eff7fe;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(90, 59, 221, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(2, 244, 254, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(255, 138, 203, 0.1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(90, 59, 221, 0.1) 0px, transparent 50%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface mesh-gradient min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/30 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_0_rgba(90,59,221,0.08)]">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-secondary-container p-[2px]">
+<div class="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
+<img alt="User" data-alt="close-up portrait of a student scientist with a bright friendly expression in a modern high-tech research lab environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB64Z3GT8hLfFxEQvUxXppDrPz6sQH_CoQShkIb0EcOKSX_iW556dRUnjn0gRmKd3yBXnLhPOTIs7FqxDmxm45Vdmf_G9MZTv2RCZ7fvV6oEalXLNVbGjKFqy9wly6c7g2sKdcEXhlaliDN8_NL6Fwpya-YrrWgIDOFOvj3aHT-pZ3TxziJ6q7VAsuq7Dy6lnuTprumuTs-KHNA7AnzfS59c2a1ZJMViBkD9BWp95rMoJCXCkZKz33FjCpByofN3MEPp1M9tgwMMNnP"/>
+</div>
+</div>
+<h1 class="font-['Orbitron'] font-bold tracking-tight text-xl font-black text-[#5a3bdd] drop-shadow-sm">Luminous Science</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/20 transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined text-[#5a3bdd]">settings</span>
+</button>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-screen-2xl mx-auto space-y-8 pb-12">
+<!-- Hero Section: Recommendation & Progress -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Recommendation Engine -->
+<div class="lg:col-span-8 group relative overflow-hidden rounded-xl glass-panel p-8 flex flex-col md:flex-row items-center gap-8 shadow-sm">
+<div class="flex-1 space-y-4">
+<div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-primary/10 text-primary font-semibold text-sm">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                        Recommended Next Step
+                    </div>
+<h2 class="text-3xl md:text-4xl font-headline font-bold text-on-surface">Go to Stand 15: Quantum Physics</h2>
+<p class="text-on-surface-variant max-w-md">Based on your interests in Particle Mechanics and current low wait times, this is the optimal flow for your journey.</p>
+<button class="mt-4 px-8 py-3 bg-primary text-white rounded-full font-bold shadow-[0_0_20px_rgba(90,59,221,0.3)] hover:scale-105 transition-transform active:scale-95 flex items-center gap-2">
+                        Get Directions
+                        <span class="material-symbols-outlined">near_me</span>
+</button>
+</div>
+<div class="relative w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden shadow-2xl border-2 border-white/50 rotate-3 group-hover:rotate-0 transition-transform duration-500">
+<img class="w-full h-full object-cover" data-alt="abstract visualization of quantum particles colliding with glowing purple and cyan energy trails on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD85hhMMOe91YM6-W-WK4xHXeNPC0tyigNiFqMXSOsJn1tb4ES1-Xqv7_svzmbZi6nDZxoFxXx7mTjqCIp4mRPDs4ZH6NN0S8JfstpdEd5_J9CjOjVcuCzdEn8YN1vLGgphwv5mm9hISde_UQx9mXrY2H-_Z2mC0zppGf2kNBj2UjNWxnp27_Owh00iD3pq4Xi66u_SG1uGMPlYoiWtD5uJo60EdYNDSk-HUFUaRKZ8KHP2kQTY_8c60UZx2jE7XWYOmucjvEwVrsCU"/>
+</div>
+</div>
+<!-- Progress Module -->
+<div class="lg:col-span-4 glass-panel rounded-xl p-8 flex flex-col items-center justify-center text-center space-y-6">
+<h3 class="font-headline font-bold text-xl">Event Progress</h3>
+<div class="relative w-40 h-40">
+<!-- Progress Background Ring -->
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-high" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-width="12"></circle>
+<circle cx="80" cy="80" fill="transparent" r="70" stroke="url(#gradient-progress)" stroke-dasharray="440" stroke-dashoffset="220" stroke-linecap="round" stroke-width="12"></circle>
+<defs>
+<lineargradient id="gradient-progress" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#5a3bdd"></stop>
+<stop offset="100%" style="stop-color:#00f4fe"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-4xl font-headline font-black text-primary">14/28</span>
+<span class="text-xs font-label uppercase tracking-widest text-on-surface-variant">Modules</span>
+</div>
+</div>
+<p class="text-sm font-medium text-on-surface-variant">You're halfway through the Luminous Science fair! Keep exploring.</p>
+</div>
+</div>
+<!-- Occupancy Map Section -->
+<section class="space-y-6">
+<div class="flex justify-between items-end">
+<div>
+<h3 class="text-2xl font-headline font-bold">Interactive Floor Map</h3>
+<p class="text-on-surface-variant">Real-time occupancy and module tracking</p>
+</div>
+<div class="hidden md:flex gap-4">
+<div class="flex items-center gap-2 text-xs font-bold uppercase tracking-tighter">
+<span class="w-3 h-3 rounded-full bg-[#10b981]"></span> Available
+                    </div>
+<div class="flex items-center gap-2 text-xs font-bold uppercase tracking-tighter">
+<span class="w-3 h-3 rounded-full bg-[#f59e0b]"></span> Moderate
+                    </div>
+<div class="flex items-center gap-2 text-xs font-bold uppercase tracking-tighter">
+<span class="w-3 h-3 rounded-full bg-[#ef4444]"></span> Busy
+                    </div>
+</div>
+</div>
+<div class="glass-panel p-4 md:p-8 rounded-xl shadow-inner">
+<div class="grid grid-cols-4 sm:grid-cols-7 gap-4">
+<!-- Generating 28 stand modules -->
+<!-- Stand 1-28 Logic with status variation -->
+<script>
+                        // Note: This script is for visual logic within the UI block.
+                        // I will render them statically in the HTML as requested.
+                    </script>
+<!-- Example Stand (Active/Visited) -->
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border-2 border-primary/40 bg-primary/5 hover:bg-primary/10 transition-all cursor-pointer active:scale-95 shadow-[0_0_15px_rgba(90,59,221,0.1)]">
+<span class="font-headline font-bold text-primary">01</span>
+<span class="absolute top-2 right-2 material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#10b981]"></div>
+</div>
+<!-- Repeat for 28 nodes with variations -->
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20 hover:border-primary/50 hover:bg-white/60 transition-all cursor-pointer active:scale-95">
+<span class="font-headline font-bold text-on-surface/40">02</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#ef4444]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20 hover:border-primary/50 hover:bg-white/60 transition-all cursor-pointer active:scale-95">
+<span class="font-headline font-bold text-on-surface/40">03</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#10b981]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20 hover:border-primary/50 hover:bg-white/60 transition-all cursor-pointer active:scale-95">
+<span class="font-headline font-bold text-on-surface/40">04</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#f59e0b]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border-2 border-primary/40 bg-primary/5">
+<span class="font-headline font-bold text-primary">05</span>
+<span class="absolute top-2 right-2 material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">06</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#10b981]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">07</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#ef4444]"></div>
+</div>
+<!-- Row 2 -->
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">08</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#10b981]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border-2 border-primary/40 bg-primary/5">
+<span class="font-headline font-bold text-primary">09</span>
+<span class="absolute top-2 right-2 material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">10</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#f59e0b]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">11</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#10b981]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">12</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#ef4444]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">13</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#10b981]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">14</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#f59e0b]"></div>
+</div>
+<!-- Row 3 -->
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border-4 border-secondary-container bg-white shadow-[0_0_30px_rgba(2,244,254,0.4)] animate-pulse">
+<span class="font-headline font-bold text-primary">15</span>
+<div class="absolute -top-3 px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[8px] font-black uppercase rounded-full">Next</div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">16</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#10b981]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border-2 border-primary/40 bg-primary/5">
+<span class="font-headline font-bold text-primary">17</span>
+<span class="absolute top-2 right-2 material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">18</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#ef4444]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border-2 border-primary/40 bg-primary/5">
+<span class="font-headline font-bold text-primary">19</span>
+<span class="absolute top-2 right-2 material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">20</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#10b981]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">21</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#f59e0b]"></div>
+</div>
+<!-- Row 4 -->
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">22</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#10b981]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">23</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#ef4444]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">24</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#10b981]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border-2 border-primary/40 bg-primary/5">
+<span class="font-headline font-bold text-primary">25</span>
+<span class="absolute top-2 right-2 material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">26</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#f59e0b]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">27</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#10b981]"></div>
+</div>
+<div class="group relative aspect-square glass-panel rounded-lg flex items-center justify-center border border-white/20">
+<span class="font-headline font-bold text-on-surface/40">28</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#ef4444]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Dynamic Bento Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="glass-panel p-6 rounded-xl space-y-4">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary text-3xl">leaderboard</span>
+<span class="text-xs font-bold text-primary px-2 py-1 bg-primary/10 rounded">Global</span>
+</div>
+<div>
+<h4 class="font-headline font-bold">Community Ranking</h4>
+<p class="text-sm text-on-surface-variant">Top explorer in "Astro-Physics"</p>
+</div>
+<div class="flex items-center gap-4 py-2 border-t border-white/20">
+<div class="text-2xl font-black text-primary">#4</div>
+<div class="text-xs text-on-surface-variant font-medium">Out of 1,240 participants today</div>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-xl space-y-4 bg-gradient-to-br from-tertiary-container/20 to-transparent">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-tertiary text-3xl">school</span>
+<span class="text-xs font-bold text-tertiary px-2 py-1 bg-tertiary/10 rounded">Mentorship</span>
+</div>
+<div>
+<h4 class="font-headline font-bold">Talk to a Teacher</h4>
+<p class="text-sm text-on-surface-variant">Dr. Aris is currently at Stand 08 for a Q&amp;A session.</p>
+</div>
+<button class="w-full py-2 bg-tertiary text-white rounded-full font-bold text-sm shadow-md hover:bg-tertiary-dim transition-colors">Join Session</button>
+</div>
+<div class="glass-panel p-6 rounded-xl space-y-4">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-secondary-dim text-3xl">qr_code_scanner</span>
+<span class="text-xs font-bold text-secondary-dim px-2 py-1 bg-secondary-container rounded">Ready</span>
+</div>
+<div>
+<h4 class="font-headline font-bold">Quick Scan</h4>
+<p class="text-sm text-on-surface-variant">Scan stand QR to log your progress and unlock rewards.</p>
+</div>
+<button class="w-full py-2 border-2 border-secondary-container text-secondary-dim rounded-full font-bold text-sm hover:bg-secondary-container/10 transition-colors">Open Scanner</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/40 backdrop-blur-2xl border-t border-white/20 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] z-50 rounded-t-[2rem]">
+<div class="flex flex-col items-center justify-center bg-[#5a3bdd] text-white rounded-full px-5 py-2 shadow-[0_0_15px_rgba(90,59,221,0.4)] transition-transform active:scale-90 duration-200 ease-out">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-600 p-2 hover:text-[#5a3bdd] transition-all">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider">Scanner</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-600 p-2 hover:text-[#5a3bdd] transition-all">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider">Ranking</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-600 p-2 hover:text-[#5a3bdd] transition-all">
+<span class="material-symbols-outlined">school</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider">Teacher</span>
+</div>
+</nav>
+<!-- Floating Action Button (FAB) for Mobile Scanner - suppress on settings etc, but appropriate here -->
+<button class="md:hidden fixed bottom-24 right-6 w-16 h-16 bg-primary text-white rounded-full shadow-[0_12px_40px_rgba(90,59,221,0.4)] flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl">qr_code_scanner</span>
+</button>
+</body></html>

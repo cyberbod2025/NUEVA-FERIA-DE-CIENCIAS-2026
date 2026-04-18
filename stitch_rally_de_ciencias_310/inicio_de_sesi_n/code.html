@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-dim": "#911c69",
+                      "background": "#eff7fe",
+                      "surface-variant": "#d2dee8",
+                      "primary-fixed": "#a192ff",
+                      "inverse-on-surface": "#969ea4",
+                      "error-dim": "#a70138",
+                      "on-secondary": "#c9fcff",
+                      "on-tertiary-fixed-variant": "#720050",
+                      "on-surface": "#283035",
+                      "on-error": "#ffefef",
+                      "surface-container": "#dfeaf2",
+                      "tertiary-fixed": "#ff8acb",
+                      "tertiary-fixed-dim": "#f974c1",
+                      "surface-dim": "#c9d6e0",
+                      "primary": "#5a3bdd",
+                      "on-primary-fixed-variant": "#2a0091",
+                      "primary-container": "#a192ff",
+                      "on-primary-fixed": "#000000",
+                      "surface-bright": "#eff7fe",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#004346",
+                      "on-primary-container": "#210077",
+                      "on-tertiary": "#ffeff4",
+                      "surface-container-high": "#d9e4ed",
+                      "on-secondary-container": "#00575b",
+                      "on-surface-variant": "#545d62",
+                      "on-secondary-fixed-variant": "#006266",
+                      "surface": "#eff7fe",
+                      "secondary-fixed": "#00f4fe",
+                      "outline-variant": "#a6aeb5",
+                      "on-background": "#283035",
+                      "inverse-primary": "#917eff",
+                      "error-container": "#f74b6d",
+                      "on-tertiary-fixed": "#360024",
+                      "secondary-dim": "#00595d",
+                      "surface-container-highest": "#d2dee8",
+                      "inverse-surface": "#070f14",
+                      "outline": "#70787e",
+                      "on-primary": "#f6f0ff",
+                      "tertiary": "#a12b76",
+                      "surface-tint": "#5a3bdd",
+                      "on-error-container": "#510017",
+                      "secondary-container": "#00f4fe",
+                      "error": "#b41340",
+                      "on-tertiary-container": "#620044",
+                      "tertiary-container": "#ff8acb",
+                      "primary-dim": "#4e2bd1",
+                      "secondary": "#00666a",
+                      "primary-fixed-dim": "#9481ff",
+                      "surface-container-low": "#e9f2fa",
+                      "secondary-fixed-dim": "#00e5ee"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .refractive-boundary {
+            backdrop-filter: blur(40px);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+        }
+        .glow-button {
+            box-shadow: 0 0 20px rgba(123, 97, 255, 0.3);
+            background: linear-gradient(45deg, #7B61FF, #00F5FF);
+        }
+        .animate-marquee {
+            display: flex;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .gloss-highlight {
+            position: relative;
+            overflow: hidden;
+        }
+        .gloss-highlight::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%);
+            pointer-events: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-surface overflow-hidden min-h-screen flex flex-col">
+<!-- Ambient Background Layer -->
+<div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-primary/20 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary-fixed-dim/30 blur-[100px] rounded-full"></div>
+<div class="absolute top-[20%] right-[5%] w-[30%] h-[30%] bg-tertiary-fixed/10 blur-[80px] rounded-full"></div>
+</div>
+<!-- Main Content Canvas -->
+<main class="relative z-10 flex-grow flex items-center justify-center p-6">
+<div class="w-full max-w-md">
+<!-- Brand Identity Section -->
+<div class="text-center mb-10">
+<div class="inline-flex items-center justify-center w-20 h-20 glass-card rounded-xl mb-6 shadow-xl">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="science">science</span>
+</div>
+<h1 class="font-headline font-bold text-4xl tracking-tight text-on-surface mb-2">Feria de Ciencias</h1>
+<p class="text-on-surface-variant font-medium">Explora, Descubre y Aprende</p>
+</div>
+<!-- Login Container (Glassmorphism) -->
+<div class="glass-card rounded-lg p-8 shadow-2xl border border-white/20">
+<!-- Role Selection (Asymmetric / Custom Design) -->
+<div class="flex gap-4 mb-8">
+<button class="flex-1 py-4 px-4 rounded-lg bg-primary text-white shadow-lg transition-all duration-300 transform active:scale-95 flex flex-col items-center gap-2 font-headline font-semibold">
+<span class="material-symbols-outlined text-2xl" data-icon="school">school</span>
+<span>Alumno</span>
+</button>
+<button class="flex-1 py-4 px-4 rounded-lg bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 transform active:scale-95 flex flex-col items-center gap-2 font-headline font-semibold">
+<span class="material-symbols-outlined text-2xl" data-icon="person_book">person_book</span>
+<span>Profesor</span>
+</button>
+</div>
+<!-- Form Fields -->
+<form class="space-y-6" onsubmit="return false;">
+<div class="space-y-1">
+<label class="block text-[11px] font-bold uppercase tracking-widest text-primary ml-2 mb-1">Correo Electrónico</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="alternate_email">alternate_email</span>
+<input class="w-full bg-white/40 border-none rounded-full py-4 pl-12 pr-6 focus:ring-2 focus:ring-primary/50 text-on-surface placeholder:text-outline backdrop-blur-md transition-all" placeholder="nombre@escuela.edu" type="email"/>
+</div>
+</div>
+<div class="space-y-1">
+<label class="block text-[11px] font-bold uppercase tracking-widest text-primary ml-2 mb-1">Contraseña</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="lock">lock</span>
+<input class="w-full bg-white/40 border-none rounded-full py-4 pl-12 pr-6 focus:ring-2 focus:ring-primary/50 text-on-surface placeholder:text-outline backdrop-blur-md transition-all" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between px-2">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="w-4 h-4 rounded border-none bg-white/60 text-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+<span class="text-xs font-medium text-on-surface-variant group-hover:text-on-surface">Recordarme</span>
+</label>
+<a class="text-xs font-semibold text-primary-dim hover:underline transition-all" href="#">¿Olvidaste tu acceso?</a>
+</div>
+<!-- Primary CTA -->
+<button class="w-full py-5 rounded-full glow-button text-white font-headline font-bold text-lg tracking-wide gloss-highlight transition-all hover:scale-[1.02] active:scale-95 shadow-xl flex items-center justify-center gap-3">
+<span>Iniciar Sesión</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<div class="mt-8 pt-8 border-t border-white/10 text-center">
+<p class="text-sm text-on-surface-variant">
+                        ¿Nuevo en la feria? 
+                        <a class="font-bold text-secondary-dim hover:text-primary transition-colors" href="#">Crea tu cuenta aquí</a>
+</p>
+</div>
+</div>
+<!-- Visual Accreditation / Decorative -->
+<div class="mt-12 flex justify-center items-center gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+<img class="h-6" data-alt="minimalist modern educational ministry logo in white and purple" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATscS0SXEFEPcaFiXPcld6mPkyopa73C70t7ECgQg3wbfICaNXaX7GEWxRBG7uhyz0V_PIwyTK2bJE_OOQTf78XGlFpOaBKl0F-2NtbUDMmOPXMcK3zYW8KWVE-fnPjiSqWSnMkgTg7w5j50Vplqf5EZvbDrYJ0NCKuyAMTIMw9NA3ewULPtHq8qbTQj5P1_q1td20f3LYEDPW3GZxDZXZT7caneX1wjgDxpoNVVBYLNJ0HO80ZbnA7_ZYSXVe6hMQvBDmw6DEb5LO"/>
+<img class="h-6" data-alt="scientific research council logo with clean geometric shapes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOxxwUtHQCbOfZKig9h_pJPQP5bAHwe5psA1HgUTo7s5p_THaoN7XwdV9SCPe9IU2xohr6nKgrM8-8H4p1jq5D7naImiwI4YZ98OBCbOr5ZxUl_HmgxhBGrwF0464hrQXYxmfMxdOP1taAUPP5MinfH1TGlxkNgnV4minr6cdONGpPiIDv20bvePHynF5r8w19XCfICnJpeSfTjtiUyO8GqXIGMxnlRR8DYgIdfCdzDNpfrWKA-qEJQGhJl2RvTuwKZWFQnlQoJmGz"/>
+</div>
+</div>
+</main>
+<!-- Marquee Footer (Shared Component JSON Integration) -->
+<footer class="bg-cyan-500/10 dark:bg-cyan-900/20 backdrop-blur-sm w-full py-1 mb-20 fixed bottom-0 tonal-shift">
+<div class="flex items-center justify-center overflow-hidden whitespace-nowrap animate-marquee">
+<span class="font-['Inter'] italic text-[11px] text-cyan-600 dark:text-cyan-300 px-4">
+                Diseñado por Prof. Hugo Sanchez — Escuela Secundaria Técnica — Feria de Ciencias 2024 — Innovación Educativa — Diseñado por Prof. Hugo Sanchez — Escuela Secundaria Técnica — Feria de Ciencias 2024 — Innovación Educativa
+            </span>
+</div>
+</footer>
+<!-- Decorative Refractive Orb (Foreground Layer) -->
+<div class="fixed top-[15%] left-[5%] w-12 h-12 glass-card rounded-full blur-[2px] border border-white/30 animate-pulse pointer-events-none"></div>
+<div class="fixed bottom-[20%] right-[10%] w-24 h-24 glass-card rounded-full blur-[4px] border border-white/20 pointer-events-none"></div>
+</body></html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ranking - Feria de Ciencias</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-dim": "#911c69",
+                    "background": "#eff7fe",
+                    "surface-variant": "#d2dee8",
+                    "primary-fixed": "#a192ff",
+                    "inverse-on-surface": "#969ea4",
+                    "error-dim": "#a70138",
+                    "on-secondary": "#c9fcff",
+                    "on-tertiary-fixed-variant": "#720050",
+                    "on-surface": "#283035",
+                    "on-error": "#ffefef",
+                    "surface-container": "#dfeaf2",
+                    "tertiary-fixed": "#ff8acb",
+                    "tertiary-fixed-dim": "#f974c1",
+                    "surface-dim": "#c9d6e0",
+                    "primary": "#5a3bdd",
+                    "on-primary-fixed-variant": "#2a0091",
+                    "primary-container": "#a192ff",
+                    "on-primary-fixed": "#000000",
+                    "surface-bright": "#eff7fe",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#004346",
+                    "on-primary-container": "#210077",
+                    "on-tertiary": "#ffeff4",
+                    "surface-container-high": "#d9e4ed",
+                    "on-secondary-container": "#00575b",
+                    "on-surface-variant": "#545d62",
+                    "on-secondary-fixed-variant": "#006266",
+                    "surface": "#eff7fe",
+                    "secondary-fixed": "#00f4fe",
+                    "outline-variant": "#a6aeb5",
+                    "on-background": "#283035",
+                    "inverse-primary": "#917eff",
+                    "error-container": "#f74b6d",
+                    "on-tertiary-fixed": "#360024",
+                    "secondary-dim": "#00595d",
+                    "surface-container-highest": "#d2dee8",
+                    "inverse-surface": "#070f14",
+                    "outline": "#70787e",
+                    "on-primary": "#f6f0ff",
+                    "tertiary": "#a12b76",
+                    "surface-tint": "#5a3bdd",
+                    "on-error-container": "#510017",
+                    "secondary-container": "#00f4fe",
+                    "error": "#b41340",
+                    "on-tertiary-container": "#620044",
+                    "tertiary-container": "#ff8acb",
+                    "primary-dim": "#4e2bd1",
+                    "secondary": "#00666a",
+                    "primary-fixed-dim": "#9481ff",
+                    "surface-container-low": "#e9f2fa",
+                    "secondary-fixed-dim": "#00e5ee"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        background-color: #eff7fe;
+        background-image: 
+          radial-gradient(at 0% 0%, #a192ff33 0px, transparent 50%),
+          radial-gradient(at 100% 0%, #00f4fe33 0px, transparent 50%),
+          radial-gradient(at 100% 100%, #ff8acb33 0px, transparent 50%),
+          radial-gradient(at 0% 100%, #5a3bdd33 0px, transparent 50%);
+        min-height: 100vh;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      .refractive-boundary {
+        box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+      }
+      .animate-marquee {
+        animation: marquee 25s linear infinite;
+      }
+      @keyframes marquee {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(123,97,255,0.08)] refractive-boundary">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-md mx-auto">
+<button class="active:scale-95 duration-200 p-2 rounded-full hover:bg-violet-100/50 dark:hover:bg-violet-900/50 transition-all">
+<span class="material-symbols-outlined text-violet-600 dark:text-violet-400">qr_code_scanner</span>
+</button>
+<h1 class="font-['Space_Grotesk'] font-bold text-lg text-violet-700 dark:text-violet-300 tracking-tight">Feria de Ciencias</h1>
+<button class="active:scale-95 duration-200 p-2 rounded-full hover:bg-violet-100/50 dark:hover:bg-violet-900/50 transition-all">
+<span class="material-symbols-outlined text-violet-600 dark:text-violet-400">account_circle</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-32 px-4 max-w-md mx-auto space-y-6">
+<!-- Notification Banner -->
+<div class="relative overflow-hidden rounded-lg bg-gradient-to-r from-primary to-secondary p-[1px]">
+<div class="bg-white/90 backdrop-blur-md px-4 py-3 flex items-center justify-between rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">campaign</span>
+<span class="font-headline font-bold text-primary tracking-tight">¡Nuevos Líderes!</span>
+</div>
+<span class="text-[10px] bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">Ahora</span>
+</div>
+</div>
+<!-- Custom Tabs Section -->
+<div class="flex p-1.5 glass-card rounded-full refractive-boundary shadow-sm">
+<button class="flex-1 py-2 px-4 rounded-full text-sm font-bold transition-all bg-gradient-to-br from-primary to-primary-container text-white shadow-lg shadow-primary/20">Mejores Alumnos</button>
+<button class="flex-1 py-2 px-4 rounded-full text-sm font-medium text-on-surface-variant hover:text-primary transition-colors">Mejor Grupo</button>
+</div>
+<!-- Podium Section (Top 3) -->
+<div class="flex items-end justify-center gap-4 py-8">
+<!-- 2nd Place -->
+<div class="flex flex-col items-center">
+<div class="relative mb-2">
+<div class="w-16 h-16 rounded-full p-1 bg-gradient-to-tr from-slate-300 to-slate-100 shadow-xl overflow-hidden">
+<img class="w-full h-full rounded-full object-cover" data-alt="Portrait of a smiling young student" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD6L0crBUTl22SO33yCu15qYqv1Dbz_AFUpPt6avKbc37k5Tcd6dlZ1LV-iGyb-ZM0SOh65dluoh9sOiNpYaxyBQVt5UZTLCfgdxiElskq--McrDxjs65wajobuDUP0kuSU7RKHz3yFgFE8Fmw78XQfgVGgfYKr4KtkcEWtCITTQxqqXn6ZqqP8ZvBKwAZ1qv1_ft7FFcZ2ZX_qKULCpjyZeJMFLr7O8E-aO2RByQPzkXAxKh39mfefHUyUPKGDQOnPPCypvJTSfUM"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-slate-400 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ring-2 ring-white">2</div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Sofía G.</span>
+<span class="text-xs font-headline font-extrabold text-primary">2.450 pts</span>
+<span class="flex items-center text-[10px] text-green-500 font-bold"><span class="material-symbols-outlined text-[14px]">arrow_drop_up</span>1</span>
+</div>
+<!-- 1st Place -->
+<div class="flex flex-col items-center">
+<div class="relative mb-4">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2">
+<span class="material-symbols-outlined text-yellow-500 text-3xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div class="w-24 h-24 rounded-full p-1.5 bg-gradient-to-tr from-yellow-400 to-amber-200 shadow-2xl shadow-yellow-200 overflow-hidden ring-4 ring-white/50">
+<img class="w-full h-full rounded-full object-cover" data-alt="Portrait of a young male student" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtBbyCZjmcEYHlzwKbajcgz-2vkQVhQm4st_WjG4L_4NxN1RmLbr5znWl9CE8gWjXhOJjsc7ZTZo3um4ziFtob20inuzigzMmuAOPjVBZpepPw0P3h6SrYj3e2cS5IUF44MPKcLNxyTSahYghPg5ggG-4UcHMH-DcNQJi9WNc6JPihrCN7zV_Trfm8MRcz-PicbTQP4VGGl5TrjUcEPlktPB9ny9y75coZP6057GkozTHTYnIqJleim4NMd5xqnhkz-qW7Md2f8gXW"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-yellow-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ring-4 ring-white">1</div>
+</div>
+<span class="text-xs font-bold text-on-surface uppercase">Mateo R.</span>
+<span class="text-base font-headline font-black text-primary">2.890 pts</span>
+<span class="flex items-center text-[10px] text-on-surface-variant font-bold"><span class="material-symbols-outlined text-[14px]">remove</span>0</span>
+</div>
+<!-- 3rd Place -->
+<div class="flex flex-col items-center">
+<div class="relative mb-2">
+<div class="w-16 h-16 rounded-full p-1 bg-gradient-to-tr from-orange-400 to-orange-200 shadow-xl overflow-hidden">
+<img class="w-full h-full rounded-full object-cover" data-alt="Portrait of a student girl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKqZWV7DT_Cj9swyXJvrafsRVxD6k8RyMpl8m8K5bwfaSx_llchfcttBoLrkjrS-z6PYR1EMuqsjRLNHK-xBXiAlReiOV_JiuYRbB3Wiq8pSzJUP8_4TZupIA7-B9jODfqIjPeRBzNX-JSD0fahCxiy6nHrYqH-fYpEC0xH1avjzxmzUUQbilK4kcSjblRYKKyFpP9rwYXwIm3nRNNSc8BdNTzphdRgEVve4vDS-XuR1g_ulJ2_yW29hP5hTNLgrS7iiSV9yXUisML"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-orange-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ring-2 ring-white">3</div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Lucía V.</span>
+<span class="text-xs font-headline font-extrabold text-primary">2.120 pts</span>
+<span class="flex items-center text-[10px] text-red-500 font-bold"><span class="material-symbols-outlined text-[14px]">arrow_drop_up</span>1</span>
+</div>
+</div>
+<!-- Ranking List -->
+<div class="space-y-3">
+<h2 class="text-sm font-headline font-bold text-on-surface-variant px-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                Resto del Ranking
+            </h2>
+<div class="space-y-2">
+<!-- Row 4 -->
+<div class="glass-card p-3 rounded-lg flex items-center gap-4 refractive-boundary shadow-sm hover:translate-x-1 transition-transform">
+<span class="w-6 text-center font-headline font-bold text-on-surface-variant">4</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIhZzgCSsf4sofiCujxvGxnXhrxr6oFpB4gy3FnA6yyUTszFZlGmm8SNQ-MskSQH-yx1V-EbslJ50fIFUVE-uP6N7ZmCQA0lCfos-KKeJHmUPS0r057M2pHrIu_VqSrm-ADklRonYuBggklJ-08Jfm56WaVsKz_61JmhPMTbRS__torTKFLWIZmVWJ8MvTSNksoDEMxHHxyD1qdno7JC4LR_Oby3JfH4HFhDDBFrWGzLr65ysgDXiVfEXpyJZ0hijTc4En1pCJGHsN"/>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Julián Pérez</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">3° Año - División B</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-headline font-bold text-primary">1.980</p>
+<span class="text-[10px] text-green-500 flex items-center justify-end font-bold"><span class="material-symbols-outlined text-xs">arrow_drop_up</span>2</span>
+</div>
+</div>
+<!-- Row 5 -->
+<div class="glass-card p-3 rounded-lg flex items-center gap-4 refractive-boundary shadow-sm hover:translate-x-1 transition-transform">
+<span class="w-6 text-center font-headline font-bold text-on-surface-variant">5</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhomao3kcS0_2RaFvYaYcGIS1p1WQyLetpvFgzLhx2sRSi6LJMJklOn6qQbmzDi6vOp-1vBAXB1J2hxfD8lzCuowFizHbQuTxSuy_zZbnyuS8-xCtADHu5iB5tLiIxHI19BphW4iZNbQ1CzPt9681BfxCt1ceho95wNvHJPGX9FVEAvvgG9RZUo6q7pLNFkYcPRbHZwf64fsTTqStgUPtk2mnPTgLPVbavWJnOgkp_T20ryI8lQVSasWDtY9DRJ5yWrMW6tPIRpOtH"/>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Martina Díaz</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">2° Año - División A</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-headline font-bold text-primary">1.850</p>
+<span class="text-[10px] text-red-500 flex items-center justify-end font-bold"><span class="material-symbols-outlined text-xs">arrow_drop_down</span>1</span>
+</div>
+</div>
+<!-- Row 6 -->
+<div class="glass-card p-3 rounded-lg flex items-center gap-4 refractive-boundary shadow-sm hover:translate-x-1 transition-transform">
+<span class="w-6 text-center font-headline font-bold text-on-surface-variant">6</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBna6OSEnBNlCMCFnJYUmnOQlJBPaI6bjIM8ryuA85StddOTYo234hjAQm2WbhjQqiEE_x3S4up6o1dt0OZyAuADWeiAH9lSfAV1qAhNhXxP4VeKFFsi1yqedLijugI3y6cKbWqkVj2pbj7zYqhfpLSNV4kKGC7yJuqsB4wE4RPjnxFV0D7eCQGDWKTjJhdd8B7g5ZVGOXNoF80W4mfih499fvSWdLH2lZYbREnIw955eu2rfoLlKHJfE4rwMH6tQ2sXUpbV9Wcqk3N"/>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Bruno Esparza</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">1° Año - División C</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-headline font-bold text-primary">1.720</p>
+<span class="text-[10px] text-on-surface-variant flex items-center justify-end font-bold"><span class="material-symbols-outlined text-xs">remove</span>0</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Groups Glance (Minimal Preview) -->
+<div class="glass-card p-4 rounded-xl refractive-boundary border border-white/20">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xs font-headline font-bold text-on-surface-variant uppercase tracking-wider">Top Grupos</h3>
+<span class="text-[10px] font-bold text-primary">Ver todos</span>
+</div>
+<div class="grid grid-cols-3 gap-3">
+<div class="bg-primary/5 rounded-lg p-2 text-center border border-primary/10">
+<p class="text-[10px] font-bold text-on-surface-variant">1° A</p>
+<p class="text-xs font-headline font-black text-primary">4.2k</p>
+</div>
+<div class="bg-secondary/5 rounded-lg p-2 text-center border border-secondary/10">
+<p class="text-[10px] font-bold text-on-surface-variant">3° B</p>
+<p class="text-xs font-headline font-black text-secondary">3.9k</p>
+</div>
+<div class="bg-tertiary/5 rounded-lg p-2 text-center border border-tertiary/10">
+<p class="text-[10px] font-bold text-on-surface-variant">2° D</p>
+<p class="text-xs font-headline font-black text-tertiary">3.5k</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Marquee -->
+<footer class="w-full py-1 mb-20 bg-cyan-500/10 dark:bg-cyan-900/20 backdrop-blur-sm fixed bottom-20 z-40">
+<div class="flex items-center justify-center overflow-hidden whitespace-nowrap animate-marquee">
+<span class="font-['Inter'] italic text-[11px] text-cyan-600 dark:text-cyan-300">
+                APP DISEÑADA POR HUGO SANCHEZ — Escuela Secundaria Técnica — Feria de Ciencias 2024 — Innovación y Tecnología
+            </span>
+</div>
+</footer>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-[2rem] z-50 pb-safe bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] shadow-2xl">
+<div class="flex justify-around items-end px-4 pb-4 w-full h-20 max-w-md mx-auto">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-violet-500 dark:hover:text-violet-300 transition-all cursor-pointer active:scale-90 duration-300">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider mt-1">Módulos</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-violet-500 dark:hover:text-violet-300 transition-all cursor-pointer active:scale-90 duration-300">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider mt-1">Progreso</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-gradient-to-br from-violet-500 to-cyan-400 text-white rounded-full p-3 mb-1 scale-110 shadow-lg shadow-violet-500/30 active:scale-90 transition-transform duration-300 cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider mt-1">Ranking</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-violet-500 dark:hover:text-violet-300 transition-all cursor-pointer active:scale-90 duration-300">
+<span class="material-symbols-outlined">map</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider mt-1">Mapa</span>
+</div>
+</div>
+</nav>
+</body></html>

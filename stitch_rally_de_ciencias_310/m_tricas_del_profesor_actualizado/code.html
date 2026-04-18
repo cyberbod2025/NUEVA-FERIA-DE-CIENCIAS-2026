@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-dim": "#911c69",
+                    "background": "#eff7fe",
+                    "surface-variant": "#d2dee8",
+                    "primary-fixed": "#a192ff",
+                    "inverse-on-surface": "#969ea4",
+                    "error-dim": "#a70138",
+                    "on-secondary": "#c9fcff",
+                    "on-tertiary-fixed-variant": "#720050",
+                    "on-surface": "#283035",
+                    "on-error": "#ffefef",
+                    "surface-container": "#dfeaf2",
+                    "tertiary-fixed": "#ff8acb",
+                    "tertiary-fixed-dim": "#f974c1",
+                    "surface-dim": "#c9d6e0",
+                    "primary": "#5a3bdd",
+                    "on-primary-fixed-variant": "#2a0091",
+                    "primary-container": "#a192ff",
+                    "on-primary-fixed": "#000000",
+                    "surface-bright": "#eff7fe",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#004346",
+                    "on-primary-container": "#210077",
+                    "on-tertiary": "#ffeff4",
+                    "surface-container-high": "#d9e4ed",
+                    "on-secondary-container": "#00575b",
+                    "on-secondary-fixed-variant": "#006266",
+                    "surface": "#eff7fe",
+                    "secondary-fixed": "#00f4fe",
+                    "outline-variant": "#a6aeb5",
+                    "on-background": "#283035",
+                    "inverse-primary": "#917eff",
+                    "error-container": "#f74b6d",
+                    "on-tertiary-fixed": "#360024",
+                    "secondary-dim": "#00595d",
+                    "surface-container-highest": "#d2dee8",
+                    "inverse-surface": "#070f14",
+                    "outline": "#70787e",
+                    "on-primary": "#f6f0ff",
+                    "tertiary": "#a12b76",
+                    "surface-tint": "#5a3bdd",
+                    "on-error-container": "#510017",
+                    "secondary-container": "#00f4fe",
+                    "error": "#b41340",
+                    "on-tertiary-container": "#620044",
+                    "tertiary-container": "#ff8acb",
+                    "primary-dim": "#4e2bd1",
+                    "secondary": "#00666a",
+                    "primary-fixed-dim": "#9481ff",
+                    "surface-container-low": "#e9f2fa",
+                    "secondary-fixed-dim": "#00e5ee"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .refractive-boundary {
+            backdrop-filter: blur(20px);
+        }
+        .tonal-shift {
+            transition: background-color 0.3s ease;
+        }
+        .animate-marquee {
+            display: flex;
+            width: fit-content;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-background min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar component updated per {{DATA:COMPONENTS:COMPONENTS_10}} -->
+<header class="fixed top-0 w-full z-50 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(123,97,255,0.08)] refractive-boundary backdrop-blur-md">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-md mx-auto">
+<span class="material-symbols-outlined text-violet-600 dark:text-violet-400 active:scale-95 duration-200" data-icon="qr_code_scanner">qr_code_scanner</span>
+<h1 class="font-['Space_Grotesk'] font-bold text-lg text-xl tracking-tight text-violet-700 dark:text-violet-300">Feria de Ciencias</h1>
+<span class="material-symbols-outlined text-violet-600 dark:text-violet-400 active:scale-95 duration-200" data-icon="account_circle">account_circle</span>
+</div>
+</header>
+<main class="pt-20 pb-32 px-4 max-w-md mx-auto space-y-6">
+<!-- Hero Metrics Canvas -->
+<section class="relative overflow-hidden rounded-lg bg-surface-container-low p-6 shadow-sm border border-white/20">
+<div class="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-24 -left-24 w-48 h-48 bg-secondary-fixed/10 rounded-full blur-3xl"></div>
+<div class="relative z-10 space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="font-headline font-bold text-xl text-on-surface">Métricas en Vivo</h2>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-widest">En Tiempo Real</span>
+</div>
+<!-- Bento Statistics -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white/60 backdrop-blur-md rounded-lg p-4 flex flex-col justify-between h-32 border border-white/40">
+<span class="text-on-surface-variant text-xs font-semibold">Tiempo Promedio de Visita</span>
+<div>
+<span class="text-3xl font-headline font-bold text-primary">12</span>
+<span class="text-sm text-on-surface-variant font-medium"> min</span>
+</div>
+<div class="w-full bg-surface-variant h-1 rounded-full overflow-hidden">
+<div class="bg-primary w-3/4 h-full"></div>
+</div>
+</div>
+<div class="bg-white/60 backdrop-blur-md rounded-lg p-4 flex flex-col justify-between h-32 border border-white/40">
+<span class="text-on-surface-variant text-xs font-semibold">Progreso General</span>
+<div class="flex items-baseline gap-1">
+<span class="text-3xl font-headline font-bold text-secondary">68</span>
+<span class="text-sm text-on-surface-variant font-medium">%</span>
+</div>
+<div class="flex gap-1">
+<div class="h-1 flex-1 bg-secondary rounded-full"></div>
+<div class="h-1 flex-1 bg-secondary rounded-full"></div>
+<div class="h-1 flex-1 bg-surface-variant rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Crowd Distribution Heatmap -->
+<section class="space-y-3">
+<div class="flex items-center justify-between px-2">
+<h3 class="font-headline font-bold text-lg text-on-surface">Distribución de Público</h3>
+<div class="flex items-center gap-2 text-[10px] font-bold text-on-surface-variant">
+<span>FRÍO</span>
+<div class="w-20 h-2 bg-gradient-to-r from-cyan-400 via-yellow-400 to-red-500 rounded-full"></div>
+<span>CALIENTE</span>
+</div>
+</div>
+<div class="relative aspect-square w-full bg-surface-container-highest rounded-lg overflow-hidden shadow-lg border-4 border-white">
+<!-- Heatmap Background Map -->
+<img class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-multiply" data-alt="top down architectural floor plan of a modern school patio with minimalist lines and soft shadows on a light concrete floor" data-location="Escuela Secundaria" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLT1MeNiEA2iYeXCHLraIbRuwJWciX1ptqAe7NgADrC25nP9Zey0pjIF8JQj1GD9aiV44Apwh7K49Ng71ICsRx3HUgMF8UWfquN_qNDN9RFBjacziCjym1jhL3ruHo_ari_eauT-pNXtzc11WoYJNEmI7dqIBIrvTUdvHbBypNKuiJ9XyqUjU3fd_QDgyrDejeQG3ou0CZJAqI9W6HOWTicQwCHr04Kor9Aqic7X7cHPH-NE8VZbTuagIhV0iEaFUypByiRZ5BLDFZ"/>
+<!-- Heatmap Overlay -->
+<div class="absolute inset-0 grid grid-cols-6 grid-rows-6 p-4">
+<div class="col-start-2 col-span-2 row-start-2 row-span-2 bg-red-500/40 blur-2xl rounded-full"></div>
+<div class="col-start-5 col-span-1 row-start-4 row-span-2 bg-orange-500/30 blur-xl rounded-full"></div>
+<div class="col-start-1 col-span-2 row-start-5 row-span-1 bg-cyan-400/30 blur-xl rounded-full"></div>
+<div class="col-start-4 col-span-2 row-start-1 row-span-2 bg-cyan-400/20 blur-2xl rounded-full"></div>
+</div>
+<!-- Interactive Pins -->
+<div class="absolute top-[30%] left-[25%] flex flex-col items-center">
+<div class="w-3 h-3 bg-red-600 rounded-full animate-ping absolute"></div>
+<div class="w-3 h-3 bg-red-600 rounded-full border-2 border-white shadow-sm relative"></div>
+<div class="mt-1 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[8px] font-bold shadow-sm">ZONA ROBÓTICA</div>
+</div>
+<div class="absolute bottom-[20%] right-[30%] flex flex-col items-center">
+<div class="w-3 h-3 bg-cyan-500 rounded-full border-2 border-white shadow-sm"></div>
+<div class="mt-1 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[8px] font-bold shadow-sm">ARTE DIGITAL</div>
+</div>
+</div>
+</section>
+<!-- Minimalist Engagement Chart -->
+<section class="bg-white/40 backdrop-blur-xl rounded-lg p-5 border border-white/30 space-y-4">
+<h3 class="font-headline font-bold text-on-surface">Interacción por Hora</h3>
+<div class="flex items-end justify-between h-32 gap-2">
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/20 rounded-t-full h-[40%]"></div>
+<span class="text-[9px] font-bold text-on-surface-variant">08h</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/40 rounded-t-full h-[65%]"></div>
+<span class="text-[9px] font-bold text-on-surface-variant">10h</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary rounded-t-full h-[95%] relative">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-primary text-white text-[8px] font-bold px-1.5 py-0.5 rounded">PICO</div>
+</div>
+<span class="text-[9px] font-bold text-on-surface-variant">12h</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/60 rounded-t-full h-[75%]"></div>
+<span class="text-[9px] font-bold text-on-surface-variant">14h</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/30 rounded-t-full h-[50%]"></div>
+<span class="text-[9px] font-bold text-on-surface-variant">16h</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer component updated per {{DATA:COMPONENTS:COMPONENTS_10}} -->
+<footer class="w-full py-1 mb-20 bg-cyan-500/10 dark:bg-cyan-900/20 backdrop-blur-sm flex items-center justify-center overflow-hidden whitespace-nowrap tonal-shift">
+<div class="animate-marquee flex items-center gap-8">
+<p class="font-['Inter'] italic text-[11px] text-cyan-600 dark:text-cyan-300">APP DISEÑADA POR HUGO SANCHEZ</p>
+<p class="font-['Inter'] italic text-[11px] text-cyan-600 dark:text-cyan-300 underline font-bold">Escuela Secundaria Técnica</p>
+<p class="font-['Inter'] italic text-[11px] text-cyan-600 dark:text-cyan-300">APP DISEÑADA POR HUGO SANCHEZ</p>
+<p class="font-['Inter'] italic text-[11px] text-cyan-600 dark:text-cyan-300 underline font-bold">Escuela Secundaria Técnica</p>
+</div>
+</footer>
+<!-- BottomNavBar component updated per {{DATA:COMPONENTS:COMPONENTS_10}} -->
+<nav class="fixed bottom-0 w-full rounded-t-[2rem] z-50 pb-safe bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] shadow-2xl">
+<div class="flex justify-around items-end px-4 pb-4 w-full h-20">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-violet-500 dark:hover:text-violet-300 active:scale-90 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider">Módulos</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-violet-500 to-cyan-400 text-white rounded-full p-3 mb-1 scale-110 shadow-lg shadow-violet-500/30 active:scale-90 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="insights" style="font-variation-settings: 'FILL' 1;">insights</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider">Progreso</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-violet-500 dark:hover:text-violet-300 active:scale-90 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider">Ranking</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-violet-500 dark:hover:text-violet-300 active:scale-90 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider">Mapa</span>
+</a>
+</div>
+</nav>
+</body></html>

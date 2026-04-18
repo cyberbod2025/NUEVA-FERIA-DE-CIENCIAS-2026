@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Luminous Science | Teacher Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#f6f0ff",
+                        "surface-bright": "#eff7fe",
+                        "tertiary-fixed": "#ff8acb",
+                        "on-error": "#ffefef",
+                        "surface-container-low": "#e9f2fa",
+                        "on-secondary": "#c9fcff",
+                        "secondary-fixed": "#02f4fe",
+                        "inverse-primary": "#917eff",
+                        "primary-dim": "#4e2bd1",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-dim": "#8a2966",
+                        "primary-fixed-dim": "#9481ff",
+                        "tertiary-fixed-dim": "#ef7dbd",
+                        "on-primary-fixed": "#000000",
+                        "tertiary-container": "#ff8acb",
+                        "outline-variant": "#a6aeb5",
+                        "primary": "#5a3bdd",
+                        "surface-container-high": "#d9e4ed",
+                        "secondary-dim": "#00595d",
+                        "on-tertiary-fixed": "#360024",
+                        "secondary-container": "#02f4fe",
+                        "on-secondary-fixed-variant": "#006266",
+                        "surface": "#eff7fe",
+                        "primary-fixed": "#a292ff",
+                        "tertiary": "#993572",
+                        "error": "#b41340",
+                        "background": "#eff7fe",
+                        "error-container": "#f74b6d",
+                        "on-secondary-fixed": "#004346",
+                        "inverse-on-surface": "#969ea4",
+                        "surface-container-highest": "#d2dee8",
+                        "surface-dim": "#c9d6e0",
+                        "outline": "#70787e",
+                        "on-background": "#283035",
+                        "on-tertiary-container": "#620044",
+                        "on-surface-variant": "#545d62",
+                        "on-secondary-container": "#00575b",
+                        "on-error-container": "#510017",
+                        "secondary": "#00666a",
+                        "surface-container": "#dfeaf2",
+                        "on-surface": "#283035",
+                        "on-tertiary": "#ffeff4",
+                        "secondary-fixed-dim": "#00e5ee",
+                        "on-primary-fixed-variant": "#2a0090",
+                        "on-primary-container": "#210077",
+                        "error-dim": "#a70138",
+                        "surface-tint": "#5a3bdd",
+                        "primary-container": "#a292ff",
+                        "inverse-surface": "#070f14"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px);
+            border: 1.5px solid rgba(166, 174, 181, 0.15);
+        }
+        .heat-pulse-red {
+            background: radial-gradient(circle, #f74b6d 0%, transparent 70%);
+            opacity: 0.6;
+        }
+        .heat-pulse-orange {
+            background: radial-gradient(circle, #ff8acb 0%, transparent 70%);
+            opacity: 0.4;
+        }
+        .liquid-gloss {
+            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4), 0 10px 20px rgba(90, 59, 221, 0.2);
+            border-top: 2px solid #a292ff;
+        }
+        .mesh-bg {
+            background: radial-gradient(at 0% 0%, #a292ff 0%, transparent 50%),
+                        radial-gradient(at 100% 100%, #02f4fe 0%, transparent 50%),
+                        radial-gradient(at 50% 50%, #ff8acb 0%, transparent 50%);
+            background-color: #eff7fe;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-surface overflow-x-hidden mesh-bg min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/30 dark:bg-slate-900/30 backdrop-blur-xl border-b border-white/10 dark:border-white/5 shadow-[0_8px_32px_0_rgba(90,59,221,0.08)]">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-fixed" data-alt="Professional portrait of a female teacher in a brightly lit modern office setting, smiling warmly" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2XSjAWW0bmnSnXntnsyFjzgrJnxN699tHtRu5hfw_VHLuwZU9Gm37TgFYeBr8t0jR7ukCzLCVWr0gu_SctjwbhnIMB2N96OcIZvQPoqWHkqZPE1rNzoph77VN3P-Wc8mAvQK97o5S3eytkx2Sm3YEvbH_Z7_bHjIOEnS0rr1iDtowhKoUFSshXUKK2lC3gbG3aT7TWnuzhWauY8zpUZm4Ts0DDq8HFH_lUBZd2SwhHF1cPEW2VZDV8ShEg20EpLHvlSz_MaTwsgQW"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-secondary-container rounded-full border-2 border-white"></div>
+</div>
+<h1 class="font-['Orbitron'] font-bold tracking-tight text-xl font-black text-[#5a3bdd] dark:text-[#a192ff] drop-shadow-sm">Luminous Science</h1>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-slate-500 dark:text-slate-400 font-semibold hover:text-[#5a3bdd] transition-all" href="#">Curriculum</a>
+<a class="text-[#5a3bdd] font-bold" href="#">Teacher</a>
+<a class="text-slate-500 dark:text-slate-400 font-semibold hover:text-[#5a3bdd] transition-all" href="#">Analytics</a>
+</div>
+<button class="material-symbols-outlined text-[#5a3bdd] p-2 hover:bg-white/20 transition-all duration-300 rounded-full">settings</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-screen-2xl mx-auto">
+<!-- Dashboard Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="flex h-3 w-3 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-error"></span>
+</span>
+<span class="text-error font-bold tracking-widest text-xs uppercase font-headline">Live Session</span>
+</div>
+<h2 class="text-5xl font-['Orbitron'] font-black text-on-surface tracking-tighter">Physics Lab Alpha</h2>
+<p class="text-outline mt-2 text-lg">Real-time attendance and interaction tracking • 500 Students Enrolled</p>
+</div>
+<button class="bg-primary text-white px-8 py-4 rounded-full font-bold flex items-center gap-3 liquid-gloss active:scale-95 transition-all group">
+<span class="material-symbols-outlined">download</span>
+<span>Export Attendance Report</span>
+</button>
+</div>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+<!-- Real-time Floor Map (Bento Section) -->
+<section class="xl:col-span-8">
+<div class="glass-card rounded-xl p-8 h-full">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline text-2xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">map</span>
+                            Interactive Floor Map
+                        </h3>
+<div class="flex gap-4 text-xs font-bold uppercase tracking-widest">
+<span class="flex items-center gap-2"><div class="w-3 h-3 bg-error rounded-sm"></div> High Density</span>
+<span class="flex items-center gap-2"><div class="w-3 h-3 bg-secondary-container rounded-sm"></div> Active</span>
+<span class="flex items-center gap-2"><div class="w-3 h-3 bg-surface-container-highest rounded-sm"></div> Low</span>
+</div>
+</div>
+<!-- Floor Grid (28 modules) -->
+<div class="grid grid-cols-4 md:grid-cols-7 gap-4 relative">
+<!-- Module Loop (Visualized 28 cells) -->
+<!-- Cell 1: High Density Heatmap -->
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 heat-pulse-red animate-pulse"></div>
+<span class="text-xs font-bold text-outline-variant relative z-10">ST-01</span>
+<span class="text-2xl font-black text-error relative z-10">42</span>
+<span class="text-[10px] uppercase font-bold text-error/70 relative z-10">Critical</span>
+</div>
+<!-- Cell 2: Normal -->
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center border-primary/20">
+<span class="text-xs font-bold text-outline-variant">ST-02</span>
+<span class="text-2xl font-black text-primary">12</span>
+<span class="text-[10px] uppercase font-bold text-primary/70">Normal</span>
+</div>
+<!-- Cell 3: Orange Zone -->
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 heat-pulse-orange animate-pulse"></div>
+<span class="text-xs font-bold text-outline-variant relative z-10">ST-03</span>
+<span class="text-2xl font-black text-tertiary relative z-10">28</span>
+<span class="text-[10px] uppercase font-bold text-tertiary/70 relative z-10">Dense</span>
+</div>
+<!-- Repeat Pattern for more cells (Showing variety) -->
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center bg-surface-container-low/20"><span class="text-xs font-bold text-outline-variant">ST-04</span><span class="text-2xl font-black text-on-surface">5</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 heat-pulse-red animate-pulse"></div>
+<span class="text-xs font-bold text-outline-variant relative z-10">ST-05</span>
+<span class="text-2xl font-black text-error relative z-10">45</span>
+</div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-06</span><span class="text-2xl font-black text-on-surface">18</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-07</span><span class="text-2xl font-black text-on-surface">9</span></div>
+<!-- Row 2 -->
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-secondary-container/10"></div>
+<span class="text-xs font-bold text-outline-variant relative z-10">ST-08</span>
+<span class="text-2xl font-black text-secondary relative z-10">31</span>
+</div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-09</span><span class="text-2xl font-black text-on-surface">2</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-10</span><span class="text-2xl font-black text-on-surface">15</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center bg-error/5 border-error/20 relative overflow-hidden">
+<div class="absolute inset-0 heat-pulse-red animate-pulse"></div>
+<span class="text-xs font-bold text-outline-variant relative z-10">ST-11</span>
+<span class="text-2xl font-black text-error relative z-10">52</span>
+</div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-12</span><span class="text-2xl font-black text-on-surface">22</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-13</span><span class="text-2xl font-black text-on-surface">11</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-14</span><span class="text-2xl font-black text-on-surface">19</span></div>
+<!-- Rows 3-4 (Abbreviated visual logic for grid) -->
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-15</span><span class="text-2xl font-black text-on-surface">8</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-16</span><span class="text-2xl font-black text-on-surface">33</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 heat-pulse-orange animate-pulse"></div>
+<span class="text-xs font-bold text-outline-variant relative z-10">ST-17</span>
+<span class="text-2xl font-black text-tertiary relative z-10">27</span>
+</div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-18</span><span class="text-2xl font-black text-on-surface">5</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-19</span><span class="text-2xl font-black text-on-surface">12</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-20</span><span class="text-2xl font-black text-on-surface">0</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center bg-surface-container-high/40"><span class="text-xs font-bold text-outline-variant">ST-21</span><span class="text-2xl font-black text-on-surface">41</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-22</span><span class="text-2xl font-black text-on-surface">14</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-23</span><span class="text-2xl font-black text-on-surface">9</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 heat-pulse-red animate-pulse"></div>
+<span class="text-xs font-bold text-outline-variant relative z-10">ST-24</span>
+<span class="text-2xl font-black text-error relative z-10">48</span>
+</div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-25</span><span class="text-2xl font-black text-on-surface">11</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-26</span><span class="text-2xl font-black text-on-surface">3</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-27</span><span class="text-2xl font-black text-on-surface">25</span></div>
+<div class="aspect-square glass-card rounded-lg flex flex-col items-center justify-center"><span class="text-xs font-bold text-outline-variant">ST-28</span><span class="text-2xl font-black text-on-surface">16</span></div>
+</div>
+<div class="mt-8 p-6 bg-surface-container-low/30 rounded-lg border border-white/20">
+<div class="flex items-center gap-6">
+<div class="text-center">
+<p class="text-outline text-xs font-bold uppercase">Total Inside</p>
+<p class="text-3xl font-black text-primary">482/500</p>
+</div>
+<div class="h-10 w-[1px] bg-outline-variant/30"></div>
+<div class="text-center">
+<p class="text-outline text-xs font-bold uppercase">Avg Interaction</p>
+<p class="text-3xl font-black text-secondary">24m 12s</p>
+</div>
+<div class="flex-grow">
+<div class="w-full bg-surface-container-high h-3 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-primary to-secondary-container h-full w-[96%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Student List Feed -->
+<aside class="xl:col-span-4 h-full">
+<div class="glass-card rounded-xl flex flex-col h-[750px]">
+<div class="p-6 border-b border-outline-variant/10">
+<h3 class="font-headline text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">group</span>
+                            Live Student Feed
+                        </h3>
+<div class="mt-4 flex gap-2">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="w-full bg-surface-container-low/50 border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search 500 students..." type="text"/>
+</div>
+<button class="bg-surface-container-high p-2 rounded-full material-symbols-outlined text-on-surface-variant">filter_list</button>
+</div>
+</div>
+<div class="flex-grow overflow-y-auto px-6 py-4 space-y-4">
+<!-- Student Item 1 -->
+<div class="flex items-center justify-between p-4 bg-white/40 rounded-xl hover:bg-white/60 transition-all border border-transparent hover:border-primary/20">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center font-bold text-primary text-xs border border-primary/10">JD</div>
+<div>
+<h4 class="font-bold text-sm">Julianna Drago</h4>
+<p class="text-[10px] uppercase font-bold text-outline-variant tracking-wider">Group: Quantum Physics A</p>
+</div>
+</div>
+<div class="text-right">
+<span class="px-3 py-1 bg-secondary-container/20 text-secondary text-[10px] font-black rounded-full border border-secondary-container/30">ST-05</span>
+<p class="text-[9px] text-outline mt-1 italic">Active 2m ago</p>
+</div>
+</div>
+<!-- Student Item 2 -->
+<div class="flex items-center justify-between p-4 bg-white/40 rounded-xl hover:bg-white/60 transition-all border border-transparent hover:border-primary/20">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center font-bold text-tertiary text-xs border border-tertiary/10">RK</div>
+<div>
+<h4 class="font-bold text-sm">Robert Kovic</h4>
+<p class="text-[10px] uppercase font-bold text-outline-variant tracking-wider">Group: Quantum Physics B</p>
+</div>
+</div>
+<div class="text-right">
+<span class="px-3 py-1 bg-error/10 text-error text-[10px] font-black rounded-full border border-error/20">ST-11</span>
+<p class="text-[9px] text-error mt-1 italic font-bold">In high-density zone</p>
+</div>
+</div>
+<!-- Student Item 3 -->
+<div class="flex items-center justify-between p-4 bg-white/40 rounded-xl hover:bg-white/60 transition-all border border-transparent hover:border-primary/20">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center font-bold text-secondary text-xs border border-secondary/10">SM</div>
+<div>
+<h4 class="font-bold text-sm">Sarah Miller</h4>
+<p class="text-[10px] uppercase font-bold text-outline-variant tracking-wider">Group: Quantum Physics A</p>
+</div>
+</div>
+<div class="text-right">
+<span class="px-3 py-1 bg-surface-container-high/50 text-on-surface-variant text-[10px] font-black rounded-full border border-outline-variant/10">ST-22</span>
+<p class="text-[9px] text-outline mt-1 italic">Idle 14m</p>
+</div>
+</div>
+<!-- Student Item 4 -->
+<div class="flex items-center justify-between p-4 bg-white/40 rounded-xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center font-bold text-primary text-xs border border-primary/10">AH</div>
+<div>
+<h4 class="font-bold text-sm">Alex Huang</h4>
+<p class="text-[10px] uppercase font-bold text-outline-variant tracking-wider">Group: Quantum Physics C</p>
+</div>
+</div>
+<div class="text-right">
+<span class="px-3 py-1 bg-secondary-container/20 text-secondary text-[10px] font-black rounded-full">ST-01</span>
+<p class="text-[9px] text-outline mt-1">Live Tracking</p>
+</div>
+</div>
+<!-- Student Item 5 -->
+<div class="flex items-center justify-between p-4 bg-white/40 rounded-xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center font-bold text-outline text-xs">BT</div>
+<div>
+<h4 class="font-bold text-sm">Ben Thompson</h4>
+<p class="text-[10px] uppercase font-bold text-outline-variant tracking-wider">Group: Quantum Physics B</p>
+</div>
+</div>
+<div class="text-right">
+<span class="px-3 py-1 bg-surface-container-high/50 text-on-surface-variant text-[10px] font-black rounded-full">ST-18</span>
+<p class="text-[9px] text-outline mt-1">Active</p>
+</div>
+</div>
+<!-- Student Item 6 -->
+<div class="flex items-center justify-between p-4 bg-white/40 rounded-xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center font-bold text-tertiary text-xs">EL</div>
+<div>
+<h4 class="font-bold text-sm">Elena Lopez</h4>
+<p class="text-[10px] uppercase font-bold text-outline-variant tracking-wider">Group: Quantum Physics A</p>
+</div>
+</div>
+<div class="text-right">
+<span class="px-3 py-1 bg-secondary-container/20 text-secondary text-[10px] font-black rounded-full">ST-05</span>
+<p class="text-[9px] text-outline mt-1 italic">Active</p>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-outline-variant/10 bg-white/20 text-center">
+<button class="text-primary text-xs font-black uppercase tracking-widest hover:underline transition-all">View All 500 Students</button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/40 dark:bg-slate-950/40 backdrop-blur-2xl border-t border-white/20 dark:border-white/10 z-50 rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-slate-600 dark:text-slate-400 p-2 hover:text-[#5a3bdd] transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-600 dark:text-slate-400 p-2 hover:text-[#5a3bdd] transition-all" href="#">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Scanner</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-600 dark:text-slate-400 p-2 hover:text-[#5a3bdd] transition-all" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Ranking</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#5a3bdd] text-white rounded-full px-5 py-2 shadow-[0_0_15px_rgba(90,59,221,0.4)] active:scale-90 duration-200 ease-out" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">Teacher</span>
+</a>
+</nav>
+</body></html>
