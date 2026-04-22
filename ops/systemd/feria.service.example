@@ -1,0 +1,18 @@
+[Unit]
+Description=Feria module service
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/srv/feria-app/current
+EnvironmentFile=/etc/feria/feria.env
+ExecStart=/srv/feria-app/current/ops/ubuntu/start-feria.sh
+Restart=always
+RestartSec=5
+KillSignal=SIGINT
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

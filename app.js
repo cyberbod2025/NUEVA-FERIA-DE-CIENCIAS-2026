@@ -988,13 +988,23 @@ function getStandQuiz(stand) {
 }
 
 function registerCheckIn(visitor, standId, silent) {
-  moveVisitorToStand(visitor, standId, { now: Date.now(), fromSimulation: false, reason: 'scan' });
+  const analytics = computeAnalytics();
+  const stand = analytics.standStats.find(s => s.id === Number(standId));
+  
+  if (stand && stand.occupancy >= 20 && visitor.currentStandId !== stand.id) {
+    showToast('El stand ' + formatStandNumber(standId) + ' ha alcanzado su capacidad maxima (20 alumnos). Por favor, intenta en unos minutos o busca un stand con baja afluencia.');
+    return false;
+  }
+
+  moveVisitorToStand(visitor, Number(standId), { now: Date.now(), fromSimulation: false, reason: 'scan' });
   persistState().catch(handleSyncError);
 
   if (!silent) {
     renderApp();
   }
+  return true;
 }
+
 
 function moveVisitorToStand(visitor, standId, options) {
   const now = options.now || Date.now();
@@ -1307,67 +1317,152 @@ function answerQuiz(visitor, standId, selectedIndex) {
   }
 }
 
+function renderHeader(title = 'Feria de Ciencias') {
+  return `
+    <header class="fixed top-0 w-full z-50 bg-white/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(123,97,255,0.08)] refractive-boundary border-white/20 border-b">
+      <div class="flex justify-between items-center px-6 h-16 w-full max-w-md mx-auto">
+        <button class="active:scale-95 duration-200 p-2 rounded-full hover:bg-violet-100/50 transition-all">
+          <span class="material-symbols-outlined text-violet-600">qr_code_scanner</span>
+        </button>
+        <h1 class="font-headline font-bold text-lg text-violet-700 tracking-tight">${escapeHtml(title)}</h1>
+        <button class="active:scale-95 duration-200 p-2 rounded-full hover:bg-violet-100/50 transition-all">
+          <span class="material-symbols-outlined text-violet-600">account_circle</span>
+        </button>
+      </div>
+    </header>
+  `;
+}
+
+function renderFooter() {
+  return `
+    <footer class="w-full py-1 mb-20 bg-cyan-500/10 backdrop-blur-sm fixed bottom-20 z-40 overflow-hidden border-cyan-500/10 border-t">
+      <div class="flex items-center justify-center whitespace-nowrap animate-marquee">
+        <span class="font-body italic text-[11px] text-cyan-600">
+          APP DISEÑADA POR HUGO SANCHEZ — Escuela Secundaria Técnica — Feria de Ciencias 2026 — Innovación y Tecnología — 
+          APP DISEÑADA POR HUGO SANCHEZ — Escuela Secundaria Técnica — Feria de Ciencias 2026 — Innovación y Tecnología —
+        </span>
+      </div>
+    </footer>
+  `;
+}
+
+function renderBottomNav(active = 'home') {
+  const items = [
+    { id: 'home', icon: 'grid_view', label: 'Módulos', hash: '#/alumno' },
+    { id: 'map', icon: 'map', label: 'Mapa', hash: '#/alumno/mapa' },
+    { id: 'ranking', icon: 'leaderboard', label: 'Ranking', hash: '#/alumno/ranking' }
+  ];
+
+  return `
+    <nav class="fixed bottom-0 w-full rounded-t-[2rem] z-50 pb-safe bg-white/60 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] shadow-2xl">
+      <div class="flex justify-around items-end px-4 pb-4 w-full h-20 max-w-md mx-auto">
+        ${items.map(item => `
+          <div 
+            class="flex flex-col items-center justify-center cursor-pointer transition-all active:scale-90 duration-300 ${active === item.id ? 'bg-gradient-to-br from-violet-500 to-cyan-400 text-white rounded-full p-3 mb-1 scale-110 shadow-lg shadow-violet-500/30' : 'text-slate-400 p-2 hover:text-violet-500'}"
+            onclick="window.location.hash = '${item.hash}'"
+          >
+            <span class="material-symbols-outlined ${active === item.id ? 'icon-filled' : ''}">${item.icon}</span>
+            <span class="font-body text-[10px] font-semibold uppercase tracking-wider mt-1">${item.label}</span>
+          </div>
+        `).join('')}
+      </div>
+    </nav>
+  `;
+}
+
 function renderLoginView(analytics) {
   const hottest = analytics.hottestStands[0];
   const coolest = analytics.coolestStands[0];
 
   return `
-    <div class='page-shell'>
-      <main class='page-content page-content--login'>
-        <section class='login-grid'>
-          <article class='glass hero-card'>
-            <p class='eyebrow'>Feria de Ciencias 2026</p>
-            <h2>App funcional para repartir 500 visitantes entre 28 stands.</h2>
-            <p class='subtitle'>Este MVP usa QR por stand para registrar ubicacion, recomiendas el siguiente destino segun aforo y expone un panel docente para reequilibrar el flujo.</p>
-            <div class='stat-strip'>
-              ${renderStatPill('Visitantes', String(MAX_VISITORS))}
-              ${renderStatPill('Stands', '28')}
-              ${renderStatPill('Timeout activo', PRESENCE_TIMEOUT_MINUTES + ' min')}
-              ${renderStatPill('Promedio actual', analytics.averageOccupancy + ' por stand')}
+    ${renderHeader()}
+    <main class="pt-20 pb-16 px-4 max-w-md mx-auto space-y-6">
+      <!-- Hero Card - Overview -->
+      <section class="glass-card refractive-boundary rounded-lg p-6 space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary">analytics</span>
+          </div>
+          <div>
+            <p class="text-[10px] font-bold text-primary uppercase tracking-widest">Feria de Ciencias 2026</p>
+            <h2 class="font-headline font-bold text-lg leading-tight">Control de Flujo</h2>
+          </div>
+        </div>
+        <p class="text-xs text-on-surface-variant leading-relaxed">
+          Repartiendo 500 visitantes en 28 stands. Usa QR para registro de ubicación y redistribución inteligente.
+        </p>
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <div class="bg-primary/5 rounded-lg p-3 border border-primary/10">
+            <p class="text-[10px] font-bold text-on-surface-variant uppercase">Visitantes</p>
+            <p class="text-xl font-headline font-bold text-primary">${MAX_VISITORS}</p>
+          </div>
+          <div class="bg-secondary/5 rounded-lg p-3 border border-secondary/10">
+            <p class="text-[10px] font-bold text-on-surface-variant uppercase">Promedio</p>
+            <p class="text-xl font-headline font-bold text-secondary">${analytics.averageOccupancy}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- User Form -->
+      <section class="glass-card refractive-boundary rounded-lg p-6 space-y-6 shadow-xl">
+        <div class="text-center space-y-1">
+          <h2 class="font-headline font-bold text-xl">Acceso Alumnos</h2>
+          <p class="text-xs text-on-surface-variant italic">Completa tus datos para entrar</p>
+        </div>
+        
+        <form data-form="login" class="space-y-4">
+          <div class="space-y-3">
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary/40 text-sm">person</span>
+              <input 
+                class="w-full pl-9 pr-4 py-3 rounded-lg border-primary/20 bg-white/40 focus:ring-primary focus:border-primary text-sm font-medium transition-all" 
+                type="text" name="firstName" placeholder="Nombre" required
+              >
             </div>
-            <div class='grid-2'>
-              <div class='summary-card'>
-                <p class='mini-label'>Mayor presion</p>
-                <strong class='summary-number'>${escapeHtml(hottest.name)}</strong>
-                <p class='metric-copy'>${hottest.occupancy} visitantes en ${escapeHtml(hottest.zone)}.</p>
-              </div>
-              <div class='summary-card'>
-                <p class='mini-label'>Mejor opcion libre</p>
-                <strong class='summary-number'>${escapeHtml(coolest.name)}</strong>
-                <p class='metric-copy'>${coolest.occupancy} visitantes. Ideal para redirigir.</p>
-              </div>
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary/40 text-sm">person</span>
+              <input 
+                class="w-full pl-9 pr-4 py-3 rounded-lg border-primary/20 bg-white/40 focus:ring-primary focus:border-primary text-sm font-medium transition-all" 
+                type="text" name="lastName" placeholder="Apellido" required
+              >
             </div>
-          </article>
-          <article class='glass form-card'>
-            <p class='eyebrow'>Acceso de alumnos</p>
-            <h2>Entrar a la feria</h2>
-            <p class='subtitle'>Los alumnos entran aqui con nombre, apellido y grupo. El panel docente ya no se habilita desde esta pantalla publica.</p>
-            <form data-form='login'>
-              <div class='field-grid'>
-                <label class='field'>
-                  <span>Nombre</span>
-                  <input class='input' type='text' name='firstName' placeholder='Valentina'>
-                </label>
-                <label class='field'>
-                  <span>Apellido</span>
-                  <input class='input' type='text' name='lastName' placeholder='Rios'>
-                </label>
-                <label class='field'>
-                  <span>Grupo</span>
-                  <input class='input' type='text' name='group' placeholder='3B'>
-                </label>
-              </div>
-              <button class='button button--wide' type='submit'>Entrar al MVP</button>
-            </form>
-            <div class='summary-card'>
-              <p class='mini-label'>Acceso docente</p>
-              <strong class='summary-number'>Solo por SASE</strong>
-              <p class='metric-copy'>Los maestros deben entrar desde SASE para abrir el dashboard docente de la feria.</p>
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary/40 text-sm">group</span>
+              <input 
+                class="w-full pl-9 pr-4 py-3 rounded-lg border-primary/20 bg-white/40 focus:ring-primary focus:border-primary text-sm font-medium transition-all" 
+                type="text" name="group" placeholder="Grupo (ej: 3B)" required
+              >
             </div>
-          </article>
-        </section>
-      </main>
-    </div>
+          </div>
+
+          <button class="w-full py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-headline font-bold text-lg shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" type="submit">
+            Entrar a la Feria
+          </button>
+        </form>
+
+        <div class="pt-4 border-t border-primary/10">
+          <div class="flex items-center justify-between text-xs font-bold text-primary px-1">
+            <span>ACCESO DOCENTE</span>
+            <span class="px-2 py-0.5 bg-primary/10 rounded uppercase tracking-tighter">Solo vía SASE</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Critical Status -->
+      <section class="grid grid-cols-2 gap-4">
+        <div class="glass-card p-4 rounded-lg border border-red-500/10">
+          <p class="text-[10px] font-bold text-red-500 uppercase">Mayor Presión</p>
+          <p class="text-sm font-headline font-bold truncate">${escapeHtml(hottest.name)}</p>
+          <p class="text-[10px] text-on-surface-variant">${hottest.occupancy} personas</p>
+        </div>
+        <div class="glass-card p-4 rounded-lg border border-green-500/10">
+          <p class="text-[10px] font-bold text-green-500 uppercase">Fluido</p>
+          <p class="text-sm font-headline font-bold truncate">${escapeHtml(coolest.name)}</p>
+          <p class="text-[10px] text-on-surface-variant">${coolest.occupancy} personas</p>
+        </div>
+      </section>
+    </main>
+    ${renderFooter()}
   `;
 }
 

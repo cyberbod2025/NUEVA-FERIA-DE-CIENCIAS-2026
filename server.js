@@ -6,7 +6,8 @@ const path = require('node:path');
 const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, 'data');
 const STANDS_PATH = path.join(DATA_DIR, 'stands.json');
-const STATE_PATH = path.join(DATA_DIR, 'state.json');
+const IS_VERCEL = process.env.VERCEL === '1';
+const STATE_PATH = IS_VERCEL ? path.join('/tmp', 'feria-state.json') : path.join(DATA_DIR, 'state.json');
 const PORT = Number(process.env.PORT || 3000);
 
 const APP_VERSION = 2;
@@ -56,67 +57,71 @@ const MIME_TYPES = {
   '.md': 'text/markdown; charset=utf-8'
 };
 
-bootstrap().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+if (require.main === module) {
+  bootstrap().catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+}
 
 async function bootstrap() {
-  await fs.mkdir(DATA_DIR, { recursive: true });
+  await fs.mkdir(path.dirname(STATE_PATH), { recursive: true });
 
-  const server = http.createServer(async (request, response) => {
-    try {
-      const url = new URL(request.url, `http://${request.headers.host}`);
-
-      if (url.pathname === '/api/state' && request.method === 'GET') {
-        const state = await loadState({ writeIfAdvanced: true });
-        return sendJson(response, 200, state);
-      }
-
-      if (url.pathname === '/api/state' && request.method === 'PUT') {
-        const stands = await loadCatalog();
-        const body = await readJsonBody(request);
-        const nextState = normalizeIncomingState(body, stands);
-        await writeState(nextState);
-        return sendJson(response, 200, nextState);
-      }
-
-      if (url.pathname === '/api/session/student' && request.method === 'POST') {
-        try {
-          const body = await readJsonBody(request);
-          const sessionData = await registerStudentSession(body);
-          return sendJson(response, 200, sessionData);
-        } catch (error) {
-          return sendJson(response, error.statusCode || 400, { error: 'invalid_student', message: error.message });
-        }
-      }
-
-      if (url.pathname === '/api/session/teacher/sase' && request.method === 'POST') {
-        try {
-          const body = await readJsonBody(request);
-          const sessionData = await registerTeacherSessionFromSase(body);
-          return sendJson(response, 200, sessionData);
-        } catch (error) {
-          return sendJson(response, error.statusCode || 401, { error: 'invalid_teacher_session', message: error.message });
-        }
-      }
-
-      if (url.pathname === '/api/reset' && request.method === 'POST') {
-        const state = await createInitialState();
-        await writeState(state);
-        return sendJson(response, 200, state);
-      }
-
-      await serveStatic(url.pathname, response);
-    } catch (error) {
-      console.error(error);
-      sendJson(response, 500, { error: 'server_error', message: error.message });
-    }
-  });
+  const server = http.createServer(handleRequest);
 
   server.listen(PORT, () => {
     console.log(`Feria backend listo en http://localhost:${PORT}`);
   });
+}
+
+async function handleRequest(request, response) {
+  try {
+    const url = new URL(request.url, `http://${request.headers.host}`);
+
+    if (url.pathname === '/api/state' && request.method === 'GET') {
+      const state = await loadState({ writeIfAdvanced: true });
+      return sendJson(response, 200, state);
+    }
+
+    if (url.pathname === '/api/state' && request.method === 'PUT') {
+      const stands = await loadCatalog();
+      const body = await readJsonBody(request);
+      const nextState = normalizeIncomingState(body, stands);
+      await writeState(nextState);
+      return sendJson(response, 200, nextState);
+    }
+
+    if (url.pathname === '/api/session/student' && request.method === 'POST') {
+      try {
+        const body = await readJsonBody(request);
+        const sessionData = await registerStudentSession(body);
+        return sendJson(response, 200, sessionData);
+      } catch (error) {
+        return sendJson(response, error.statusCode || 400, { error: 'invalid_student', message: error.message });
+      }
+    }
+
+    if (url.pathname === '/api/session/teacher/sase' && request.method === 'POST') {
+      try {
+        const body = await readJsonBody(request);
+        const sessionData = await registerTeacherSessionFromSase(body);
+        return sendJson(response, 200, sessionData);
+      } catch (error) {
+        return sendJson(response, error.statusCode || 401, { error: 'invalid_teacher_session', message: error.message });
+      }
+    }
+
+    if (url.pathname === '/api/reset' && request.method === 'POST') {
+      const state = await createInitialState();
+      await writeState(state);
+      return sendJson(response, 200, state);
+    }
+
+    await serveStatic(url.pathname, response);
+  } catch (error) {
+    console.error(error);
+    sendJson(response, 500, { error: 'server_error', message: error.message });
+  }
 }
 
 async function loadState(options = {}) {
@@ -543,7 +548,7 @@ async function registerTeacherSessionFromSase(input) {
   return {
     role: 'teacher',
     provider: 'sase',
-    userId: String(payload.sub || payload.teacherId || payload.email),
+    userId: String(payload.sub || payload.uid || payload.teacherId || payload.email),
     displayName: String(payload.name || payload.displayName || 'Docente SASE'),
     email: String(payload.email || ''),
     issuedAt: Number(payload.iat || Math.floor(Date.now() / 1000)) * 1000,
@@ -559,9 +564,10 @@ function verifySaseTeacherToken(token) {
 
   const payloadPart = parts[0];
   const signaturePart = parts[1];
-  const expectedSignature = crypto.createHmac('sha256', SASE_SHARED_SECRET).update(payloadPart).digest('base64url');
+  const expectedBase64UrlSignature = crypto.createHmac('sha256', SASE_SHARED_SECRET).update(payloadPart).digest('base64url');
+  const expectedHexSignature = crypto.createHmac('sha256', SASE_SHARED_SECRET).update(payloadPart).digest('hex');
 
-  if (!timingSafeCompare(signaturePart, expectedSignature)) {
+  if (!timingSafeCompare(signaturePart, expectedBase64UrlSignature) && !timingSafeCompare(signaturePart, expectedHexSignature)) {
     throw createHttpError(401, 'La firma del token de SASE no es valida.');
   }
 
@@ -579,7 +585,7 @@ function verifySaseTeacherToken(token) {
     throw createHttpError(403, 'El token recibido no corresponde a un maestro.');
   }
 
-  if (!payload.sub && !payload.teacherId && !payload.email) {
+  if (!payload.sub && !payload.uid && !payload.teacherId && !payload.email) {
     throw createHttpError(400, 'El token de SASE no trae un identificador de maestro.');
   }
 
@@ -673,6 +679,10 @@ function sendJson(response, statusCode, payload) {
 }
 
 async function readJsonBody(request) {
+  if (request && typeof request.body === 'object' && request.body !== null && !Buffer.isBuffer(request.body)) {
+    return request.body;
+  }
+
   const chunks = [];
   for await (const chunk of request) {
     chunks.push(chunk);
@@ -684,3 +694,17 @@ async function readJsonBody(request) {
 
   return JSON.parse(Buffer.concat(chunks).toString('utf8'));
 }
+
+module.exports = {
+  handleRequest,
+  loadState,
+  loadCatalog,
+  normalizeIncomingState,
+  registerStudentSession,
+  registerTeacherSessionFromSase,
+  createInitialState,
+  writeState,
+  sendJson,
+  readJsonBody,
+  verifySaseTeacherToken,
+};
